@@ -1,0 +1,109 @@
+{
+  "name": "universal-project-template",
+  "version": "1.0.0",
+  "description": "Universal project template with TELIS methodology",
+  "type": "template",
+  "metadata": {
+    "template_version": "1.0.0",
+    "telis_version": "1.0.0",
+    "created": "2025-12-03",
+    "last_updated": "2025-12-03"
+  },
+  "project": {
+    "name": "[PROJECT_NAME]",
+    "version": "0.1.0",
+    "description": "[PROJECT_DESCRIPTION]",
+    "author": "[AUTHOR_NAME]",
+    "license": "MIT",
+    "repository": {
+      "type": "git",
+      "url": "[REPOSITORY_URL]"
+    }
+  },
+  "languages": {
+    "primary": "[javascript|python|typescript|go|rust|java|etc]",
+    "additional": []
+  },
+  "framework": {
+    "name": "[express|react|django|flask|nextjs|etc]",
+    "version": "[VERSION]"
+  },
+  "telis_config": {
+    "enabled": true,
+    "layers": {
+      "lsp_symbiosis": {
+        "enabled": true,
+        "servers": {
+          "javascript": "typescript-language-server",
+          "python": "pylsp",
+          "typescript": "typescript-language-server"
+        }
+      },
+      "knowledge_shards": {
+        "enabled": true,
+        "tiers": {
+          "nano": 50,
+          "micro": 500,
+          "full": 2000
+        }
+      },
+      "progressive_negotiation": {
+        "enabled": true,
+        "confidence_threshold": 0.85
+      }
+    },
+    "validation": {
+      "ast_parsing": true,
+      "type_checking": true,
+      "linting": true
+    },
+    "targets": {
+      "syntax_error_rate": "< 0.5%",
+      "type_error_rate": "< 1.0%",
+      "api_misuse_rate": "< 0.5%",
+      "total_error_rate": "< 2.0%"
+    }
+  },
+  "structure": {
+    "type": "universal",
+    "depth_limit": 5,
+    "naming_convention": {
+      "files": "camelCase",
+      "directories": "lowercase",
+      "components": "PascalCase"
+    }
+  },
+  "context_documents": {
+    "instructions": ".context/instructions.md",
+    "knowledge": ".context/knowledge.md",
+    "tools": ".context/tools.md",
+    "summary": ".context/summary.md",
+    "rules": ".context/rules.md"
+  },
+  "directories": {
+    "context": ".context",
+    "templates": ".template",
+    "workflows": ".workflows",
+    "docs": "docs",
+    "source": "src",
+    "tests": "tests",
+    "config": "config",
+    "scripts": "scripts"
+  },
+  "environment": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0",
+    "python": ">=3.9",
+    "git": ">=2.0.0"
+  },
+  "customization": {
+    "instructions": [
+      "Update project metadata in this file",
+      "Customize .context/ documents for your domain",
+      "Adapt src/ structure for your project type",
+      "Configure LSP servers for your languages",
+      "Set up testing framework",
+      "Initialize version control"
+    ]
+  }
+}

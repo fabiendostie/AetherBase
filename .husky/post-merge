@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "🔄 Running post-merge tasks..."
+
+# Check if package.json or package-lock.json changed
+changed_files="$(git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD)"
+
+check_run() {
+  echo "$changed_files" | grep --quiet "$1" && eval "$2"
+}
+
+# Update dependencies if package files changed
+check_run "package.json\|package-lock.json" "echo '📦 Dependencies updated, running npm install...' && npm install"
+
+# Update Python dependencies if requirements.txt changed
+check_run "requirements.txt" "echo '🐍 Python dependencies updated, running pip install...' && pip install -r requirements.txt"
+
+echo "✅ Post-merge tasks completed!"

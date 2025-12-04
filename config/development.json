@@ -1,0 +1,24 @@
+{
+    "app": {
+        "name": "My Application",
+        "version": "0.1.0",
+        "environment": "development"
+    },
+    "server": {
+        "port": 3000,
+        "host": "localhost"
+    },
+    "database": {
+        "host": "localhost",
+        "port": 5432,
+        "name": "myapp_dev"
+    },
+    "logging": {
+        "level": "debug",
+        "format": "json"
+    },
+    "features": {
+        "feature_flag_1": true,
+        "feature_flag_2": false
+    }
+}
