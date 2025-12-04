@@ -266,6 +266,7 @@ AI: [Generates validated, type-safe code]
 ## 🙏 Credits
 
 - **TELIS Methodology**: Token-Efficient Language Intelligence System
+- **BMAD Framework**: Breakthrough Method for Agile Ai Driven Development
 - **Context Engineering**: Based on optimal context engineering practices
 - **Folder Structure**: Following perfect folders methodology
 
