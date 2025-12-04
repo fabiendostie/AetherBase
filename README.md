@@ -110,6 +110,27 @@ See [TELIS.md](TELIS.md) for complete methodology documentation.
 
 ---
 
+## 🧠 BMAD Framework Integration
+
+This template integrates the **BMAD (Breakthrough Method for Agile Ai Driven Development)** framework.
+
+### Key Features
+- **19 Specialized Agents**: Switch roles instantly (e.g., "Act as Architect").
+- **4-Phase Methodology**: Analysis → Planning → Solutioning → Implementation.
+- **Structured Workflows**: Pre-defined paths for PRDs, Architecture, and Coding.
+
+### Quick Start
+1.  **Switch Role**: "Act as Product Manager"
+2.  **Start Planning**: "Run create-prd"
+3.  **Switch Role**: "Act as Architect"
+4.  **Design System**: "Run create-architecture"
+5.  **Switch Role**: "Act as Developer"
+6.  **Build**: "Run develop-story"
+
+See [.context/bmad_roles.md](.context/bmad_roles.md) and [.workflows/bmad-lifecycle.md](.workflows/bmad-lifecycle.md) for details.
+
+---
+
 ## 📚 Context Engineering Documents
 
 The `.context/` directory contains five core documents:
