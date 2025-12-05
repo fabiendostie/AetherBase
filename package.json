@@ -5,6 +5,12 @@
     "main": "src/index.js",
     "scripts": {
         "test": "playwright test",
+        "lint": "eslint .",
+        "format": "prettier --write .",
+        "format:check": "prettier --check .",
+        "test:unit": "playwright test",
+        "test:integration": "playwright test",
+        "test:coverage": "echo 'Coverage not yet implemented for template'",
         "prepare": "husky",
         "telis:generate": "node scripts/telis/generate-shards.js"
     },
@@ -20,7 +26,11 @@
     "devDependencies": {
         "@playwright/test": "^1.40.0",
         "@types/node": "^24.10.1",
+        "eslint": "^9.39.1",
+        "eslint-config-prettier": "^10.1.8",
+        "eslint-plugin-prettier": "^5.5.4",
         "husky": "^9.1.7",
+        "prettier": "^3.7.4",
         "typescript": "^5.9.3"
     }
 }

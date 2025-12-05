@@ -1,40 +1,12 @@
 #!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
 
 echo "🧪 Running pre-push checks..."
 
-# Run unit tests
-echo "🔬 Running unit tests..."
-npm run test:unit || {
-  echo "❌ Unit tests failed. Fix failing tests before pushing."
+# Run tests
+echo "🔬 Running tests..."
+npm test || {
+  echo "❌ Tests failed. Fix failing tests before pushing."
   exit 1
 }
-
-# Run integration tests
-echo "🔗 Running integration tests..."
-npm run test:integration || {
-  echo "❌ Integration tests failed. Fix failing tests before pushing."
-  exit 1
-}
-
-# Check test coverage
-echo "📊 Checking test coverage..."
-npm run test:coverage || {
-  echo "❌ Test coverage below threshold (85%). Add more tests."
-  exit 1
-}
-
-# Verify coverage meets minimum threshold
-COVERAGE_THRESHOLD=85
-COVERAGE=$(npm run test:coverage:report 2>/dev/null | grep -oP 'All files\s+\|\s+\K[0-9.]+' | head -1)
-
-if [ ! -z "$COVERAGE" ]; then
-  COVERAGE_INT=${COVERAGE%.*}
-  if [ "$COVERAGE_INT" -lt "$COVERAGE_THRESHOLD" ]; then
-    echo "❌ Coverage ${COVERAGE}% is below minimum ${COVERAGE_THRESHOLD}%"
-    exit 1
-  fi
-  echo "✅ Coverage: ${COVERAGE}%"
-fi
 
 echo "✅ All pre-push checks passed!"

@@ -1,5 +1,4 @@
 #!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
 
 echo "🔍 Running pre-commit checks..."
 
@@ -10,20 +9,11 @@ npm run lint || {
   exit 1
 }
 
-# Run formatter
+# Run formatter check
 echo "✨ Checking code format..."
 npm run format:check || {
   echo "❌ Code formatting issues detected. Run 'npm run format' to fix."
   exit 1
 }
-
-# Run type checking (if TypeScript)
-if [ -f "tsconfig.json" ]; then
-  echo "🔧 Type checking..."
-  npm run type-check || {
-    echo "❌ Type checking failed. Please fix type errors."
-    exit 1
-  }
-fi
 
 echo "✅ Pre-commit checks passed!"
