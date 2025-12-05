@@ -1,4 +1,3 @@
-
 ---
 
 # Token-Efficient Language Intelligence System (TELIS)
@@ -16,7 +15,7 @@
 This document presents a **comprehensive, language-agnostic methodology** for maintaining current programming language knowledge while optimizing token efficiency. The system achieves **<2% code error rate** through a hybrid architecture combining:
 
 1. **LSP Symbiosis** - Real-time type/signature accuracy
-2. **Agentic RAG (TeaRAG)** - Token-efficient retrieval with graph compression  
+2. **Agentic RAG (TeaRAG)** - Token-efficient retrieval with graph compression
 3. **Progressive Context Negotiation** - On-demand information escalation
 4. **BMad Method (Process Layer)** - Agile agent workflows driving the development lifecycle
 
@@ -26,23 +25,23 @@ This document presents a **comprehensive, language-agnostic methodology** for ma
 
 ### 1.1 The Token Efficiency Challenge
 
-| Method | Tokens/Query | Latency | Accuracy | Update Freq |
-|--------|-------------|---------|----------|-------------|
-| MCP Server (baseline) | 2,000-5,000+ | High | Variable | Real-time |
-| Full Documentation Injection | 3,000-10,000 | Low | High | Manual |
-| **Target TELIS System** | **50-500** | **Low** | **>98%** | **Adaptive** |
+| Method                       | Tokens/Query | Latency | Accuracy | Update Freq  |
+| ---------------------------- | ------------ | ------- | -------- | ------------ |
+| MCP Server (baseline)        | 2,000-5,000+ | High    | Variable | Real-time    |
+| Full Documentation Injection | 3,000-10,000 | Low     | High     | Manual       |
+| **Target TELIS System**      | **50-500**   | **Low** | **>98%** | **Adaptive** |
 
 ### 1.2 Error Sources in LLM Code Generation
 
 Based on 2025 research, code errors originate from:
 
-| Error Type | Frequency | Root Cause | Mitigation |
-|------------|-----------|------------|------------|
-| **Syntax Errors** | 15-20% | Outdated language knowledge | LSP integration |
-| **Type Errors** | 25-30% | Missing type context | Real-time type inference |
-| **API Misuse** | 20-25% | Stale documentation | Semantic delta feeds |
-| **Logic Errors** | 15-20% | Incomplete context | Progressive retrieval |
-| **Framework Patterns** | 10-15% | Unknown conventions | Knowledge shards |
+| Error Type             | Frequency | Root Cause                  | Mitigation               |
+| ---------------------- | --------- | --------------------------- | ------------------------ |
+| **Syntax Errors**      | 15-20%    | Outdated language knowledge | LSP integration          |
+| **Type Errors**        | 25-30%    | Missing type context        | Real-time type inference |
+| **API Misuse**         | 20-25%    | Stale documentation         | Semantic delta feeds     |
+| **Logic Errors**       | 15-20%    | Incomplete context          | Progressive retrieval    |
+| **Framework Patterns** | 10-15%    | Unknown conventions         | Knowledge shards         |
 
 To achieve <2% overall error rate, each category must be addressed systematically.
 
@@ -88,13 +87,13 @@ To achieve <2% overall error rate, each category must be addressed systematicall
 
 **Protocol Capabilities Used:**
 
-| LSP Method | Data Provided | Token Cost | Accuracy |
-|------------|---------------|------------|----------|
-| `textDocument/hover` | Type signatures, docs | 20-50 | 100% |
-| `textDocument/completion` | Valid completions | 10-30 | 100% |
-| `textDocument/signatureHelp` | Function parameters | 15-40 | 100% |
-| `textDocument/definition` | Symbol locations | 5-10 | 100% |
-| `textDocument/diagnostic` | Error detection | 10-20 | 100% |
+| LSP Method                   | Data Provided         | Token Cost | Accuracy |
+| ---------------------------- | --------------------- | ---------- | -------- |
+| `textDocument/hover`         | Type signatures, docs | 20-50      | 100%     |
+| `textDocument/completion`    | Valid completions     | 10-30      | 100%     |
+| `textDocument/signatureHelp` | Function parameters   | 15-40      | 100%     |
+| `textDocument/definition`    | Symbol locations      | 5-10       | 100%     |
+| `textDocument/diagnostic`    | Error detection       | 10-20      | 100%     |
 
 **Implementation Requirements:**
 
@@ -113,13 +112,13 @@ lsp_integration:
     - json:
         server: "vscode-json-languageserver"
         capabilities: [completion, diagnostics, schema_validation]
-  
+
   query_pattern:
     1. Check if language has LSP support
     2. Route to LSP for type/signature queries
     3. Parse JSON response into compressed format
     4. Inject only relevant fields (avg: 30 tokens)
-    
+
   error_handling:
     - LSP timeout (>500ms): Fallback to Layer 2
     - LSP unavailable: Fallback to Layer 2
@@ -129,7 +128,7 @@ lsp_integration:
 **Token Efficiency Calculation:**
 
 ```
-Traditional: "The function `processNotes` takes an array of Note objects 
+Traditional: "The function `processNotes` takes an array of Note objects
               and returns a modified array with timing adjustments..."
               = ~150 tokens
 
@@ -152,35 +151,35 @@ Savings: 90%
 
 ```yaml
 knowledge_tiers:
-  tier_1_nano:
-    description: "Syntax-only reference"
-    token_budget: 50
-    content_type: "cheatsheet"
-    example: |
-      JS Arrow: (a,b)=>expr | (a,b)=>{stmts}
-      Destructure: const {x,y}=obj | const [a,b]=arr
-    use_case: "Quick syntax reminders"
-    
-  tier_2_micro:
-    description: "Common patterns + gotchas"
-    token_budget: 500
-    content_type: "pattern_library"
-    example: |
-      ## JS Async Patterns
-      - Promise.all(): parallel, fail-fast
-      - Promise.allSettled(): parallel, all results
-      - for await: sequential iteration
-      ## Gotchas
-      - forEach doesn't await
-      - map returns Promise[], not awaited values
-    use_case: "Pattern selection, avoiding pitfalls"
-    
-  tier_3_full:
-    description: "Complete API reference"
-    token_budget: 2000+
-    content_type: "documentation"
-    access: "on_demand_only"
-    use_case: "Rare/complex API usage"
+    tier_1_nano:
+        description: 'Syntax-only reference'
+        token_budget: 50
+        content_type: 'cheatsheet'
+        example: |
+            JS Arrow: (a,b)=>expr | (a,b)=>{stmts}
+            Destructure: const {x,y}=obj | const [a,b]=arr
+        use_case: 'Quick syntax reminders'
+
+    tier_2_micro:
+        description: 'Common patterns + gotchas'
+        token_budget: 500
+        content_type: 'pattern_library'
+        example: |
+            ## JS Async Patterns
+            - Promise.all(): parallel, fail-fast
+            - Promise.allSettled(): parallel, all results
+            - for await: sequential iteration
+            ## Gotchas
+            - forEach doesn't await
+            - map returns Promise[], not awaited values
+        use_case: 'Pattern selection, avoiding pitfalls'
+
+    tier_3_full:
+        description: 'Complete API reference'
+        token_budget: 2000+
+        content_type: 'documentation'
+        access: 'on_demand_only'
+        use_case: 'Rare/complex API usage'
 ```
 
 **Shard Organization (per language):**
@@ -194,24 +193,24 @@ shard_schema:
       topics: [promises, async_await, generators]
       tokens: 180
       embedding: <vector_768d>
-      
+
     - id: "js.array_methods"
       topics: [map, filter, reduce, flatMap]
       tokens: 150
       embedding: <vector_768d>
-      
+
     - id: "js.error_handling"
       topics: [try_catch, Error_types, custom_errors]
       tokens: 120
       embedding: <vector_768d>
-      
+
   # For TargetProject specifically:
   - id: "node.child_process"
     topics: [spawn, exec, fork, stdio]
     tokens: 200
     embedding: <vector_768d>
     relevance: "Python bridge management"
-    
+
   - id: "m4l.live_api"
     topics: [LiveAPI, LiveObject, callbacks]
     tokens: 250
@@ -249,13 +248,13 @@ negotiation_protocol:
     inject: "tier_1_nano + LSP_hover_data"
     tokens: ~50-80
     action: "Attempt code generation"
-    
+
   phase_2_confidence_check:
     trigger: "Model expresses uncertainty OR asks clarifying question"
     pattern: "I need specifics on [X]" | "Unclear about [Y]"
     action: "Inject relevant tier_2_micro shard"
     tokens: +150-300
-    
+
   phase_3_full_context:
     trigger: "Still uncertain after phase_2"
     action: "Inject tier_3_full for specific topic"
@@ -279,7 +278,7 @@ Scenario: Generate Node.js code to spawn Python process
 
 Traditional (eager loading):
   - Full child_process docs: 1,500 tokens
-  - Full Python subprocess docs: 1,200 tokens  
+  - Full Python subprocess docs: 1,200 tokens
   - Full error handling patterns: 800 tokens
   Total: 3,500 tokens
 
@@ -304,7 +303,7 @@ Savings: 95%
 ```yaml
 validation_pipeline:
   stage_1_parse:
-    javascript: 
+    javascript:
       parser: "acorn" | "babel-parser"
       action: "Parse to AST, catch SyntaxError"
     python:
@@ -313,7 +312,7 @@ validation_pipeline:
     json:
       parser: "JSON.parse()"
       action: "Validate structure"
-      
+
   stage_2_type_check:
     javascript:
       tool: "typescript --noEmit"
@@ -321,7 +320,7 @@ validation_pipeline:
     python:
       tool: "mypy --ignore-missing-imports"
       action: "Type-check generated code"
-      
+
   stage_3_lint:
     javascript:
       tool: "eslint --fix-dry-run"
@@ -329,7 +328,7 @@ validation_pipeline:
     python:
       tool: "ruff check"
       action: "Identify common issues"
-      
+
   on_error:
     action: "Regenerate with error context injected"
     retry_limit: 2
@@ -345,7 +344,7 @@ cache_specification:
   key_generation:
     formula: "hash(language + version + query_intent + context_hash)"
     example: "sha256('javascript' + 'ES2024' + 'spawn_python_process' + 'abc123')"
-    
+
   storage:
     backend: "local_sqlite" | "redis"
     schema:
@@ -355,13 +354,13 @@ cache_specification:
       - hit_count: int
       - last_hit: timestamp
       - ttl: duration (default: 7 days)
-      
+
   invalidation_triggers:
     - language_version_bump
     - shard_content_update
     - manual_invalidation
     - ttl_expiry
-    
+
   expected_hit_rate: "40-60% for active projects"
 ```
 
@@ -369,117 +368,115 @@ cache_specification:
 
 ## Part 5: Language-Specific Configurations
 
-### 5.1  Technology Stack (Example: TargetProject **USE ONLY AS TEMPLATE**) 
+### 5.1 Technology Stack (Example: TargetProject **USE ONLY AS TEMPLATE**)
 
 ```yaml
 target_project_languages:
-  
-  javascript_frontend:
-    description: "Frontend Application"
-    lsp_available: true
-    lsp_server: "typescript-language-server"
-    special_globals: [window, document]
-    shards_priority:
-      - "dom.api"
-      - "js.async"
-    validation:
-      parser: "acorn"
-      type_check: true
-      lint: "eslint"
-      
-  node_js_backend:
-    description: "Backend API"
-    lsp_available: true
-    lsp_server: "typescript-language-server"
-    shards_priority:
-      - "node.http"
-      - "node.fs"
-      - "js.async"
-    validation:
-      parser: "acorn"
-      type_check: true
-      lint: "eslint"
-      
-  python_service:
-    description: "Data Processing Service"
-    lsp_available: true
-    lsp_server: "pylsp"
-    shards_priority:
-      - "py.pandas"
-      - "py.json"
-    validation:
-      parser: "ast.parse"
-      type_check: "mypy"
-      lint: "ruff"
-      
-  json_config:
-    description: "Configuration files"
-    lsp_available: true
-    lsp_server: "vscode-json-languageserver"
-    shards_priority:
-      - "json.schema_validation"
-    validation:
-      parser: "JSON.parse"
-      schema_validator: "ajv"
+    javascript_frontend:
+        description: 'Frontend Application'
+        lsp_available: true
+        lsp_server: 'typescript-language-server'
+        special_globals: [window, document]
+        shards_priority:
+            - 'dom.api'
+            - 'js.async'
+        validation:
+            parser: 'acorn'
+            type_check: true
+            lint: 'eslint'
+
+    node_js_backend:
+        description: 'Backend API'
+        lsp_available: true
+        lsp_server: 'typescript-language-server'
+        shards_priority:
+            - 'node.http'
+            - 'node.fs'
+            - 'js.async'
+        validation:
+            parser: 'acorn'
+            type_check: true
+            lint: 'eslint'
+
+    python_service:
+        description: 'Data Processing Service'
+        lsp_available: true
+        lsp_server: 'pylsp'
+        shards_priority:
+            - 'py.pandas'
+            - 'py.json'
+        validation:
+            parser: 'ast.parse'
+            type_check: 'mypy'
+            lint: 'ruff'
+
+    json_config:
+        description: 'Configuration files'
+        lsp_available: true
+        lsp_server: 'vscode-json-languageserver'
+        shards_priority:
+            - 'json.schema_validation'
+        validation:
+            parser: 'JSON.parse'
+            schema_validator: 'ajv'
 ```
 
 ---
 
 ## Part 6: Implementation Roadmap
 
-### 6.1 Phased Development (Example: TargetProject **USE ONLY AS TEMPLATE**) 
+### 6.1 Phased Development (Example: TargetProject **USE ONLY AS TEMPLATE**)
 
 ```yaml
 phase_1_foundation:
-  duration: "2 weeks"
-  deliverables:
-    - LSP client integration for JS/Python
-    - Basic shard storage (SQLite)
-    - Tier 1 nano shards for target languages
-  validation: "LSP queries return <100ms, 100% syntax accuracy"
-  
+    duration: '2 weeks'
+    deliverables:
+        - LSP client integration for JS/Python
+        - Basic shard storage (SQLite)
+        - Tier 1 nano shards for target languages
+    validation: 'LSP queries return <100ms, 100% syntax accuracy'
+
 phase_2_retrieval:
-  duration: "2 weeks"  
-  deliverables:
-    - Embedding pipeline (UniXcoder)
-    - Shard search index
-    - Progressive negotiation protocol
-  validation: "Correct shard retrieval 95%+ of queries"
-  
+    duration: '2 weeks'
+    deliverables:
+        - Embedding pipeline (UniXcoder)
+        - Shard search index
+        - Progressive negotiation protocol
+    validation: 'Correct shard retrieval 95%+ of queries'
+
 phase_3_validation:
-  duration: "1 week"
-  deliverables:
-    - AST validation gate
-    - Behavioral cache
-    - Error recovery pipeline
-  validation: "Syntax errors <0.5%, type errors <1%"
-  
+    duration: '1 week'
+    deliverables:
+        - AST validation gate
+        - Behavioral cache
+        - Error recovery pipeline
+    validation: 'Syntax errors <0.5%, type errors <1%'
+
 phase_4_optimization:
-  duration: "1 week"
-  deliverables:
-    - Cache warming strategies
-    - Shard compression (symbolic encoding)
-    - Telemetry dashboard
-  validation: "Avg tokens/query <300, cache hit rate >40%"
+    duration: '1 week'
+    deliverables:
+        - Cache warming strategies
+        - Shard compression (symbolic encoding)
+        - Telemetry dashboard
+    validation: 'Avg tokens/query <300, cache hit rate >40%'
 ```
 
-### 6.2 Success Metrics (Example: TargetProject **USE ONLY AS TEMPLATE**) 
+### 6.2 Success Metrics (Example: TargetProject **USE ONLY AS TEMPLATE**)
 
-| Metric | Target | Measurement |
-|--------|--------|-------------|
-| **Syntax Error Rate** | <0.5% | AST parse success rate |
-| **Type Error Rate** | <1.0% | Type checker pass rate |
-| **API Misuse Rate** | <0.5% | Runtime error rate |
-| **Total Error Rate** | <2.0% | Combined metrics |
-| **Avg Tokens/Query** | <300 | Telemetry |
-| **Cache Hit Rate** | >40% | Cache statistics |
-| **LSP Latency** | <100ms | Response timing |
-| **Shard Retrieval Accuracy** | >95% | Relevance scoring |
+| Metric                       | Target | Measurement            |
+| ---------------------------- | ------ | ---------------------- |
+| **Syntax Error Rate**        | <0.5%  | AST parse success rate |
+| **Type Error Rate**          | <1.0%  | Type checker pass rate |
+| **API Misuse Rate**          | <0.5%  | Runtime error rate     |
+| **Total Error Rate**         | <2.0%  | Combined metrics       |
+| **Avg Tokens/Query**         | <300   | Telemetry              |
+| **Cache Hit Rate**           | >40%   | Cache statistics       |
+| **LSP Latency**              | <100ms | Response timing        |
+| **Shard Retrieval Accuracy** | >95%   | Relevance scoring      |
 
 ---
 
-## Part 7: Symbolic Compression Reference (Example: TargetProject **USE ONLY AS TEMPLATE**) 
-
+## Part 7: Symbolic Compression Reference (Example: TargetProject **USE ONLY AS TEMPLATE**)
 
 ### 7.1 Compressed Symbol Dictionary (Sample)
 

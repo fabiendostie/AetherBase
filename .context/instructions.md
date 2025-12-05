@@ -3,6 +3,7 @@
 ## AI System Role and Task Guidance
 
 ### Purpose
+
 This document provides high-level instructions, roles, and task-specific guidance to AI systems working on this project. It follows the **TELIS (Token-Efficient Language Intelligence System)** methodology for optimal context engineering.
 
 ---
@@ -23,29 +24,30 @@ You are a development assistant working on **[PROJECT_NAME]**. Your primary resp
 ### Code Generation Guidelines
 
 1. **Language Intelligence**
-   - Use LSP (Language Server Protocol) data when available for 100% accurate signatures
-   - Request specific API information rather than guessing
-   - Follow the progressive context negotiation protocol
+    - Use LSP (Language Server Protocol) data when available for 100% accurate signatures
+    - Request specific API information rather than guessing
+    - Follow the progressive context negotiation protocol
 
 2. **Quality Standards**
-   - Target <2% code error rate
-   - All code must be syntactically valid
-   - Follow project-specific naming conventions (see `rules.md`)
-   - Include appropriate error handling
+    - Target <2% code error rate
+    - All code must be syntactically valid
+    - Follow project-specific naming conventions (see `rules.md`)
+    - Include appropriate error handling
 
 3. **Progressive Information Requests**
    When you need specific information:
-   - **For API signatures or types**: State "I need the signature for [function/class]"
-   - **For version-specific features**: State "I need [language] [version] specifics for [feature]"
-   - **For framework patterns**: State "I need the pattern for [framework] [operation]"
-   
-   **Do NOT guess or hallucinate APIs** - request precise information instead.
+    - **For API signatures or types**: State "I need the signature for [function/class]"
+    - **For version-specific features**: State "I need [language] [version] specifics for [feature]"
+    - **For framework patterns**: State "I need the pattern for [framework] [operation]"
+
+    **Do NOT guess or hallucinate APIs** - request precise information instead.
 
 ---
 
 ## Output Formatting Requirements
 
 ### Code Output Format
+
 ```
 Language: [programming language]
 Purpose: [brief description]
@@ -55,6 +57,7 @@ Dependencies: [list any imports/dependencies]
 ```
 
 ### Documentation Format
+
 - Use markdown for all documentation
 - Include code examples where applicable
 - Provide context and rationale for design decisions
@@ -65,14 +68,14 @@ Dependencies: [list any imports/dependencies]
 
 - **Token Efficiency**: Prioritize minimal token usage without sacrificing clarity
 - **TELIS Compliance**: Follow the three-layer architecture:
-  1. LSP Symbiosis (real-time type data)
-  2. Knowledge Shards (pattern libraries)
-  3. Progressive Context Negotiation (on-demand information)
+    1. LSP Symbiosis (real-time type data)
+    2. Knowledge Shards (pattern libraries)
+    3. Progressive Context Negotiation (on-demand information)
 
 - **Validation**: All generated code must pass:
-  - AST parsing (syntax validation)
-  - Type checking (when applicable)
-  - Linting rules
+    - AST parsing (syntax validation)
+    - Type checking (when applicable)
+    - Linting rules
 
 ---
 
@@ -89,6 +92,7 @@ Dependencies: [list any imports/dependencies]
 ## Project-Specific Instructions
 
 [Add project-specific instructions here, such as:]
+
 - Architectural patterns to follow
 - Specific frameworks or libraries in use
 - Coding style preferences
@@ -97,4 +101,4 @@ Dependencies: [list any imports/dependencies]
 
 ---
 
-*This document is part of the `.context/` directory following TELIS methodology principles.*
+_This document is part of the `.context/` directory following TELIS methodology principles._

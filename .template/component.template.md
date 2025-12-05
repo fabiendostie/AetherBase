@@ -1,6 +1,7 @@
 # Example Component Template
 
 ## Component Information
+
 - **Name**: [ComponentName]
 - **Type**: [Function|Class]
 - **Purpose**: [Brief description of what this component does]
@@ -14,7 +15,7 @@
 ```javascript
 /**
  * [ComponentName] - [Brief description]
- * 
+ *
  * @param {Object} props - Component properties
  * @param {[Type]} props.[propName] - [Description]
  * @returns {JSX.Element} [Description of what is rendered]
@@ -26,7 +27,7 @@ export function ComponentName({ propName }) {
   // Effects
   useEffect(() => {
     // Side effects here
-    
+
     return () => {
       // Cleanup
     };
@@ -71,30 +72,28 @@ export default ComponentName;
 ## Customization Options
 
 ### For Class Components
+
 ```javascript
 class ComponentName extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      // Initial state
-    };
-  }
+    constructor(props) {
+        super(props);
+        this.state = {
+            // Initial state
+        };
+    }
 
-  componentDidMount() {
-    // Lifecycle method
-  }
+    componentDidMount() {
+        // Lifecycle method
+    }
 
-  render() {
-    return (
-      <div className="component-name">
-        {/* Component JSX */}
-      </div>
-    );
-  }
+    render() {
+        return <div className="component-name">{/* Component JSX */}</div>;
+    }
 }
 ```
 
 ### For TypeScript
+
 ```typescript
 interface ComponentNameProps {
   propName: PropType;
@@ -108,4 +107,4 @@ export const ComponentName: React.FC<ComponentNameProps> = ({ propName }) => {
 
 ---
 
-*This is a template file. Copy and customize for your specific needs.*
+_This is a template file. Copy and customize for your specific needs._

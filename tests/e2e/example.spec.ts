@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 /**
  * Template Verification Test
- * 
+ *
  * This test verifies that the testing infrastructure is correctly set up.
  * It does NOT require a running web server, as this is just a template.
  */

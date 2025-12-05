@@ -7,12 +7,14 @@ Streamlined workflow configuration for solo developers - all the quality gates, 
 ## Philosophy
 
 As a solo developer, you still benefit from:
+
 - ✅ Automated quality checks (linting, testing, coverage)
 - ✅ Conventional commits (clean history)
 - ✅ CI/CD pipeline (automated deployment)
 - ✅ Git hooks (prevent bad commits)
 
 But you **don't need**:
+
 - ❌ PR approvals
 - ❌ Branch protection rules
 - ❌ Code reviews
@@ -33,6 +35,7 @@ npm install
 ### 2. Simplified Git Workflow
 
 **Option A: Single Branch** (Simplest)
+
 ```bash
 # Just work on main
 git checkout main
@@ -43,6 +46,7 @@ git push
 ```
 
 **Option B: Feature Branches** (Recommended)
+
 ```bash
 # Create feature branch for organization
 git checkout -b feature/new-feature
@@ -59,6 +63,7 @@ git push
 **Don't set up branch protection rules** - you're the only developer!
 
 Just ensure:
+
 - Git hooks run locally (pre-commit, pre-push)
 - CI runs on push to main
 - Tests and coverage are enforced in CI
@@ -74,11 +79,13 @@ main ←── All commits go here directly
 ```
 
 **Pros**:
+
 - Simplest workflow
 - No branch management
 - Immediate deployments
 
 **Cons**:
+
 - No isolation for experiments
 - CI is your only safety net
 
@@ -94,11 +101,13 @@ main
 ```
 
 **Pros**:
+
 - Isolated work
 - Easy to abandon failed experiments
 - Clean main branch
 
 **Cons**:
+
 - Slightly more overhead
 
 **Use when**: Medium/large projects, multiple features in progress
@@ -113,10 +122,12 @@ main (production)
 ```
 
 **Pros**:
+
 - Separate production from development
 - Controlled releases
 
 **Cons**:
+
 - More branches to manage
 
 **Use when**: Need stable production branch, infrequent releases
@@ -130,6 +141,7 @@ main (production)
 **Don't enable branch protection** for solo projects.
 
 Instead, rely on:
+
 1. **Git hooks** (local quality gates)
 2. **CI/CD** (automated testing)
 3. **Personal discipline** (don't push broken code)
@@ -141,13 +153,13 @@ Modify `.github/workflows/ci-cd.yml`:
 ```yaml
 # Remove approval requirements
 deploy-production:
-  if: github.ref == 'refs/heads/main'
-  environment:
-    name: production
-    url: https://yourapp.com
-    # NO required reviewers for solo dev
-  steps:
-    - run: npm run deploy
+    if: github.ref == 'refs/heads/main'
+    environment:
+        name: production
+        url: https://yourapp.com
+        # NO required reviewers for solo dev
+    steps:
+        - run: npm run deploy
 ```
 
 ### Environments: Combined
@@ -157,9 +169,9 @@ deploy-production:
 ```yaml
 # Single environment
 deploy:
-  if: github.ref == 'refs/heads/main'
-  steps:
-    - run: npm run deploy
+    if: github.ref == 'refs/heads/main'
+    steps:
+        - run: npm run deploy
 ```
 
 ---
@@ -169,11 +181,13 @@ deploy:
 Even as a solo dev, maintain quality:
 
 ### Local (Git Hooks)
+
 - ✅ pre-commit: Lint + format + type check
 - ✅ commit-msg: Conventional commits
 - ✅ pre-push: Tests + coverage (85%+)
 
 ### CI/CD
+
 - ✅ All tests must pass
 - ✅ Coverage ≥85%
 - ✅ Build must succeed
@@ -241,10 +255,12 @@ feat: add OAuth login
 ```
 
 **Minimum requirements**:
+
 - Type: `feat`, `fix`, `docs`, etc.
 - Subject: Brief description
 
 **Optional** for solo:
+
 - Scope
 - Body
 - Footer
@@ -260,11 +276,13 @@ Don't lower standards! Maintain 85% coverage.
 ### E2E Tests: Critical Paths Only
 
 Focus on:
+
 - User registration/login
 - Core business flow
 - Payment (if applicable)
 
 Skip:
+
 - Edge cases in E2E (cover in unit tests)
 - Multiple browser testing (pick one: Chromium)
 
@@ -289,10 +307,10 @@ npm run test:integration
 ```yaml
 # .github/workflows/ci-cd.yml
 deploy-production:
-  if: github.ref == 'refs/heads/main'
-  steps:
-    - run: npm run deploy
-    # No approval needed!
+    if: github.ref == 'refs/heads/main'
+    steps:
+        - run: npm run deploy
+        # No approval needed!
 ```
 
 ### Rollback Plan
@@ -311,6 +329,7 @@ git push origin main
 ## Tools Checklist (Solo)
 
 ### Required ✅
+
 - [x] Husky (git hooks)
 - [x] Commitlint (conventional commits)
 - [x] ESLint (linting)
@@ -319,6 +338,7 @@ git push origin main
 - [x] GitHub Actions (CI/CD)
 
 ### Optional (Skip for Solo) ❌
+
 - [ ] Branch protection rules
 - [ ] PR templates
 - [ ] Code owners file
@@ -331,13 +351,13 @@ git push origin main
 
 ### What You Skip
 
-| Team Workflow | Solo Workflow | Time Saved |
-|---------------|---------------|------------|
-| Create PR | Direct push | 2-5 min |
-| Wait for review | No wait | 10-60 min |
-| Address review comments | No comments | 10-30 min |
-| Get approval | No approval | 5-15 min |
-| **Total per feature** | **Instant** | **30-110 min** |
+| Team Workflow           | Solo Workflow | Time Saved     |
+| ----------------------- | ------------- | -------------- |
+| Create PR               | Direct push   | 2-5 min        |
+| Wait for review         | No wait       | 10-60 min      |
+| Address review comments | No comments   | 10-30 min      |
+| Get approval            | No approval   | 5-15 min       |
+| **Total per feature**   | **Instant**   | **30-110 min** |
 
 ### What You Keep
 
@@ -364,17 +384,18 @@ Edit `.github/workflows/ci-cd.yml`:
 ```yaml
 # Remove this:
 environment:
-  name: production
-  # required reviewer removed!
+    name: production
+    # required reviewer removed!
 
 # Or simplify to:
 steps:
-  - run: npm run deploy
+    - run: npm run deploy
 ```
 
 ### 3. Simplify Workflow
 
 Choose your preferred workflow:
+
 - Trunk-based (main only)
 - Feature branches (merge directly)
 - Skip PRs entirely
@@ -390,6 +411,7 @@ Choose your preferred workflow:
 ## Best Practices (Solo)
 
 ### DO ✅
+
 - Commit frequently (end of each feature/fix)
 - Use conventional commits
 - Maintain 85%+ test coverage
@@ -398,6 +420,7 @@ Choose your preferred workflow:
 - Have rollback plan
 
 ### DON'T ❌
+
 - Skip tests "because it's just you"
 - Lower coverage standards
 - Disable git hooks
@@ -450,6 +473,7 @@ Consider adding team features when:
 - Need code review for learning
 
 Then enable:
+
 1. Branch protection on `main`
 2. Required PR approvals (1+)
 3. PR template
@@ -459,4 +483,4 @@ Then enable:
 
 **Solo developers can have all the quality benefits of team workflows without the overhead!**
 
-*Quality is non-negotiable. Process overhead is optional.*
+_Quality is non-negotiable. Process overhead is optional._

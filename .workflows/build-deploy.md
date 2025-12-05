@@ -86,6 +86,7 @@ zip -r deploy.zip dist/
 ### 7. Deploy to Environment
 
 **Development:**
+
 ```bash
 # Deploy to dev
 npm run deploy:dev
@@ -95,6 +96,7 @@ curl https://dev.yourapp.com/health
 ```
 
 **Staging:**
+
 ```bash
 # Deploy to staging
 npm run deploy:staging
@@ -104,6 +106,7 @@ npm run test:integration -- --env=staging
 ```
 
 **Production:**
+
 ```bash
 # Deploy to production (with approval)
 npm run deploy:prod
@@ -143,6 +146,7 @@ npm run health-check
 ## Environment-Specific Configuration
 
 ### Development
+
 ```yaml
 environment: development
 auto_deploy: true
@@ -151,6 +155,7 @@ notify: false
 ```
 
 ### Staging
+
 ```yaml
 environment: staging
 auto_deploy: false
@@ -160,6 +165,7 @@ notify: team-channel
 ```
 
 ### Production
+
 ```yaml
 environment: production
 auto_deploy: false
@@ -181,40 +187,40 @@ rollback_on_failure: true
 name: Build and Deploy
 
 on:
-  push:
-    branches: [main, develop]
-  pull_request:
-    branches: [main]
+    push:
+        branches: [main, develop]
+    pull_request:
+        branches: [main]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-      - run: npm ci
-      - run: npm test
-      - run: npm run build
-      
-  deploy-staging:
-    needs: build
-    if: github.ref == 'refs/heads/develop'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to Staging
-        run: npm run deploy:staging
-        
-  deploy-prod:
-    needs: build
-    if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    environment: production
-    steps:
-      - name: Deploy to Production
-        run: npm run deploy:prod
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - name: Setup Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: '18'
+            - run: npm ci
+            - run: npm test
+            - run: npm run build
+
+    deploy-staging:
+        needs: build
+        if: github.ref == 'refs/heads/develop'
+        runs-on: ubuntu-latest
+        steps:
+            - name: Deploy to Staging
+              run: npm run deploy:staging
+
+    deploy-prod:
+        needs: build
+        if: github.ref == 'refs/heads/main'
+        runs-on: ubuntu-latest
+        environment: production
+        steps:
+            - name: Deploy to Production
+              run: npm run deploy:prod
 ```
 
 ---
@@ -222,16 +228,19 @@ jobs:
 ## Troubleshooting
 
 ### Build Fails
+
 - Check dependencies: `npm install`
 - Clear cache: `npm cache clean --force`
 - Check Node version compatibility
 
 ### Tests Fail
+
 - Review test output
 - Check environment variables
 - Verify test data fixtures
 
 ### Deployment Fails
+
 - Verify credentials
 - Check network connectivity
 - Review deployment logs
@@ -242,6 +251,7 @@ jobs:
 ## Monitoring
 
 After deployment, monitor:
+
 - Application logs
 - Error rates
 - Performance metrics
@@ -250,4 +260,4 @@ After deployment, monitor:
 
 ---
 
-*This workflow can be automated or run manually. Customize based on your project's needs.*
+_This workflow can be automated or run manually. Customize based on your project's needs._

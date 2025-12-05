@@ -24,7 +24,7 @@ export default defineConfig({
         ['html'],
         ['json', { outputFile: 'test-results/results.json' }],
         ['junit', { outputFile: 'test-results/junit.xml' }],
-        ['list']
+        ['list'],
     ],
 
     /* Shared settings for all projects */
@@ -82,8 +82,6 @@ export default defineConfig({
             use: { ...devices['Desktop Chrome'], channel: 'chrome' },
         },
     ],
-
-
 
     /* Global timeout for each test */
     timeout: 30 * 1000,

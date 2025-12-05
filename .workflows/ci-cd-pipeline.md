@@ -51,28 +51,30 @@ Fast, optimized CI/CD pipeline with speed targets and comprehensive automation.
 **Runs On**: Every push/PR
 
 **Jobs**:
+
 - ESLint code linting
 - Prettier format checking
 - TypeScript type checking
 
 **Optimizations**:
+
 - Cached node_modules
 - ESLint cache enabled
 - Parallel execution
 
 ```yaml
 lint-and-typecheck:
-  runs-on: ubuntu-latest
-  timeout-minutes: 5
-  steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
-      with:
-        cache: 'npm'          # ← Cache dependencies
-    - run: npm ci
-    - run: npm run lint
-    - run: npm run format:check
-    - run: npm run type-check
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+        - uses: actions/checkout@v4
+        - uses: actions/setup-node@v4
+          with:
+              cache: 'npm' # ← Cache dependencies
+        - run: npm ci
+        - run: npm run lint
+        - run: npm run format:check
+        - run: npm run type-check
 ```
 
 **Pass Criteria**: Zero errors
@@ -91,22 +93,24 @@ lint-and-typecheck:
 
 ```yaml
 unit-tests:
-  strategy:
-    matrix:
-      shard: [1, 2, 3, 4]  # ← 4-way parallelization
-  steps:
-    - run: npm run test:unit -- --shard=${{ matrix.shard }}/4
-    - uses: actions/upload-artifact@v4
-      with:
-        name: coverage-unit-${{ matrix.shard }}
+    strategy:
+        matrix:
+            shard: [1, 2, 3, 4] # ← 4-way parallelization
+    steps:
+        - run: npm run test:unit -- --shard=${{ matrix.shard }}/4
+        - uses: actions/upload-artifact@v4
+          with:
+              name: coverage-unit-${{ matrix.shard }}
 ```
 
 **Optimizations**:
+
 - Test sharding (4-way split)
 - Jest parallel execution
 - Cached dependencies
 
 **Pass Criteria**:
+
 - All tests pass
 - Coverage ≥85%
 
@@ -122,20 +126,21 @@ unit-tests:
 
 ```yaml
 integration-tests:
-  services:
-    postgres:
-      image: postgres:15
-      options: >-
-        --health-cmd pg_isready
-      ports:
-        - 5432:5432
-  steps:
-    - run: npm run test:integration
-      env:
-        DATABASE_URL: postgresql://postgres@localhost/test
+    services:
+        postgres:
+            image: postgres:15
+            options: >-
+                --health-cmd pg_isready
+            ports:
+                - 5432:5432
+    steps:
+        - run: npm run test:integration
+          env:
+              DATABASE_URL: postgresql://postgres@localhost/test
 ```
 
 **Optimizations**:
+
 - Parallel with unit tests
 - Containerized database
 - Database connection pooling
@@ -154,17 +159,18 @@ integration-tests:
 
 ```yaml
 build:
-  needs: [lint-and-typecheck]
-  steps:
-    - run: npm ci
-    - run: npm run build
-    - uses: actions/upload-artifact@v4
-      with:
-        name: build-artifacts
-        path: dist/
+    needs: [lint-and-typecheck]
+    steps:
+        - run: npm ci
+        - run: npm run build
+        - uses: actions/upload-artifact@v4
+          with:
+              name: build-artifacts
+              path: dist/
 ```
 
 **Optimizations**:
+
 - Incremental builds
 - Cached node_modules
 - Compressed artifacts
@@ -185,17 +191,18 @@ build:
 
 ```yaml
 e2e-tests:
-  if: github.event.pull_request.draft == false  # ← Skip on drafts
-  strategy:
-    matrix:
-      browser: [chromium, firefox, webkit]
-      shard: [1, 2]
-  steps:
-    - run: npx playwright install --with-deps ${{ matrix.browser }}
-    - run: npx playwright test --project=${{ matrix.browser }} --shard=${{ matrix.shard }}/2
+    if: github.event.pull_request.draft == false # ← Skip on drafts
+    strategy:
+        matrix:
+            browser: [chromium, firefox, webkit]
+            shard: [1, 2]
+    steps:
+        - run: npx playwright install --with-deps ${{ matrix.browser }}
+        - run: npx playwright test --project=${{ matrix.browser }} --shard=${{ matrix.shard }}/2
 ```
 
 **Optimizations**:
+
 - Skip on draft PRs
 - Test sharding (2-way per browser)
 - Parallel browser execution
@@ -214,21 +221,22 @@ e2e-tests:
 
 ```yaml
 coverage-report:
-  needs: [unit-tests, integration-tests]
-  steps:
-    - name: Download coverage artifacts
-      uses: actions/download-artifact@v4
-    - name: Merge coverage
-      run: npm run coverage:merge
-    - name: Check threshold
-      run: |
-        COVERAGE=$(cat coverage/coverage-summary.json | jq '.total.lines.pct')
-        if (( $(echo "$COVERAGE < 85" | bc -l) )); then
-          exit 1
-        fi
+    needs: [unit-tests, integration-tests]
+    steps:
+        - name: Download coverage artifacts
+          uses: actions/download-artifact@v4
+        - name: Merge coverage
+          run: npm run coverage:merge
+        - name: Check threshold
+          run: |
+              COVERAGE=$(cat coverage/coverage-summary.json | jq '.total.lines.pct')
+              if (( $(echo "$COVERAGE < 85" | bc -l) )); then
+                exit 1
+              fi
 ```
 
 **Outputs**:
+
 - Merged coverage report
 - PR comment with coverage stats
 - Coverage badge update
@@ -247,17 +255,18 @@ coverage-report:
 
 ```yaml
 deploy-staging:
-  if: github.ref == 'refs/heads/develop'
-  environment:
-    name: staging
-    url: https://staging.yourapp.com
-  steps:
-    - run: npm run deploy:staging
-      env:
-        DEPLOY_TOKEN: ${{ secrets.STAGING_DEPLOY_TOKEN }}
+    if: github.ref == 'refs/heads/develop'
+    environment:
+        name: staging
+        url: https://staging.yourapp.com
+    steps:
+        - run: npm run deploy:staging
+          env:
+              DEPLOY_TOKEN: ${{ secrets.STAGING_DEPLOY_TOKEN }}
 ```
 
 **Post-Deployment**:
+
 - Smoke tests
 - Health check verification
 
@@ -270,23 +279,25 @@ deploy-staging:
 **Approval**: Required (GitHub environment protection)
 
 **Requirements**:
+
 - All tests pass
 - E2E tests complete
 - Manual approval
 
 ```yaml
 deploy-production:
-  if: github.ref == 'refs/heads/main'
-  environment:
-    name: production        # ← Requires approval
-    url: https://yourapp.com
-  steps:
-    - run: npm run deploy:prod
-      env:
-        DEPLOY_TOKEN: ${{ secrets.PROD_DEPLOY_TOKEN }}
+    if: github.ref == 'refs/heads/main'
+    environment:
+        name: production # ← Requires approval
+        url: https://yourapp.com
+    steps:
+        - run: npm run deploy:prod
+          env:
+              DEPLOY_TOKEN: ${{ secrets.PROD_DEPLOY_TOKEN }}
 ```
 
 **Post-Deployment**:
+
 - Smoke tests
 - Performance monitoring
 - Error tracking
@@ -303,7 +314,7 @@ deploy-production:
 ```yaml
 - uses: actions/setup-node@v4
   with:
-    cache: 'npm'  # Automatic npm caching
+      cache: 'npm' # Automatic npm caching
 ```
 
 **Cache Keys**: Based on `package-lock.json` hash
@@ -314,8 +325,8 @@ deploy-production:
 
 ```yaml
 strategy:
-  matrix:
-    shard: [1, 2, 3, 4]
+    matrix:
+        shard: [1, 2, 3, 4]
 ```
 
 **Test Distribution**: Jest/Playwright auto-balances
@@ -347,8 +358,8 @@ run: npx nx affected:test
 
 ```yaml
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true  # Cancel old runs
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true # Cancel old runs
 ```
 
 ---
@@ -360,24 +371,28 @@ concurrency:
 Add these to GitHub repository secrets:
 
 #### Deployment Secrets
+
 ```
 STAGING_DEPLOY_TOKEN   - Staging deployment credentials
 PROD_DEPLOY_TOKEN      - Production deployment credentials
 ```
 
 #### API Keys
+
 ```
 STAGING_API_KEY        - Staging environment API key
 PROD_API_KEY           - Production environment API key
 ```
 
 #### Database
+
 ```
 STAGING_DATABASE_URL   - Staging database connection
 PROD_DATABASE_URL      - Production database connection
 ```
 
 #### Authentication
+
 ```
 JWT_SECRET             - JWT signing key
 SIGNING_KEY            - Application signing key
@@ -396,8 +411,8 @@ SIGNING_KEY            - Application signing key
 - name: Deploy
   run: npm run deploy
   env:
-    API_KEY: ${{ secrets.PROD_API_KEY }}
-    DATABASE_URL: ${{ secrets.PROD_DATABASE_URL }}
+      API_KEY: ${{ secrets.PROD_API_KEY }}
+      DATABASE_URL: ${{ secrets.PROD_DATABASE_URL }}
 ```
 
 ---
@@ -406,32 +421,32 @@ SIGNING_KEY            - Application signing key
 
 ### Speed Targets
 
-| Stage | Target | Current |
-|-------|--------|---------|
-| Lint & Type Check | 30s | ⏱️ Monitor |
-| Unit Tests | 2min | ⏱️ Monitor |
-| Integration Tests | 3min | ⏱️ Monitor |
-| Build | 2min | ⏱️ Monitor |
-| E2E Tests | 5min | ⏱️ Monitor |
-| **Total (PR)** | **10min** | ⏱️ Monitor |
+| Stage             | Target    | Current    |
+| ----------------- | --------- | ---------- |
+| Lint & Type Check | 30s       | ⏱️ Monitor |
+| Unit Tests        | 2min      | ⏱️ Monitor |
+| Integration Tests | 3min      | ⏱️ Monitor |
+| Build             | 2min      | ⏱️ Monitor |
+| E2E Tests         | 5min      | ⏱️ Monitor |
+| **Total (PR)**    | **10min** | ⏱️ Monitor |
 
 ### Success Rates
 
-| Metric | Target | Action if Below |
-|--------|--------|-----------------|
-| Build Success | ≥98% | Investigate failures |
-| Test Pass Rate | ≥95% | Fix flaky tests |
-| E2E Pass Rate | ≥95% | Stabilize tests |
-| Deploy Success | ≥99% | Review deploy process |
+| Metric         | Target | Action if Below       |
+| -------------- | ------ | --------------------- |
+| Build Success  | ≥98%   | Investigate failures  |
+| Test Pass Rate | ≥95%   | Fix flaky tests       |
+| E2E Pass Rate  | ≥95%   | Stabilize tests       |
+| Deploy Success | ≥99%   | Review deploy process |
 
 ### Coverage Targets
 
 | Coverage Type | Target |
-|---------------|--------|
-| Lines | ≥85% |
-| Branches | ≥85% |
-| Functions | ≥85% |
-| Statements | ≥85% |
+| ------------- | ------ |
+| Lines         | ≥85%   |
+| Branches      | ≥85%   |
+| Functions     | ≥85%   |
+| Statements    | ≥85%   |
 
 ---
 
@@ -441,8 +456,8 @@ SIGNING_KEY            - Application signing key
 
 ```yaml
 on:
-  push:
-    branches: [main, develop]
+    push:
+        branches: [main, develop]
 ```
 
 **Runs**: Full pipeline + deploy (on main/develop)
@@ -451,8 +466,8 @@ on:
 
 ```yaml
 on:
-  pull_request:
-    branches: [main, develop]
+    pull_request:
+        branches: [main, develop]
 ```
 
 **Runs**: Full pipeline (no deploy)
@@ -463,7 +478,7 @@ on:
 
 ```yaml
 on:
-  workflow_dispatch:
+    workflow_dispatch:
 ```
 
 **Purpose**: Manual deployment or testing
@@ -475,10 +490,12 @@ on:
 ### Build Notifications
 
 **Success**:
+
 - GitHub commit status ✅
 - Deployment notification
 
 **Failure**:
+
 - GitHub commit status ❌
 - Email to committer
 - Slack/Discord alert (optional)
@@ -527,6 +544,7 @@ on:
 ## Best Practices
 
 ### Pipeline hygiene
+
 - ✅ Keep jobs fast (<10min total)
 - ✅ Fail fast (lint before tests)
 - ✅ Use caching aggressively
@@ -534,6 +552,7 @@ on:
 - ✅ Skip unnecessary work
 
 ### Security
+
 - ✅ Never log secrets
 - ✅ Use environment protection
 - ✅ Require approvals for production
@@ -541,6 +560,7 @@ on:
 - ✅ Audit secret access
 
 ### Maintenance
+
 - ✅ Monitor pipeline duration
 - ✅ Fix flaky tests immediately
 - ✅ Update dependencies regularly

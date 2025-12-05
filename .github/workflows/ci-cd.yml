@@ -1,330 +1,330 @@
 name: CI/CD Pipeline
 
 on:
-  push:
-    branches: [main, develop]
-  pull_request:
-    branches: [main, develop]
-  workflow_dispatch:
+    push:
+        branches: [main, develop]
+    pull_request:
+        branches: [main, develop]
+    workflow_dispatch:
 
 # Cancel in-progress runs of the same workflow
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
 
 env:
-  NODE_VERSION: '18'
-  COVERAGE_THRESHOLD: 85
+    NODE_VERSION: '18'
+    COVERAGE_THRESHOLD: 85
 
 jobs:
-  # Job 1: Lint and Type Check (Parallel, ~30s)
-  lint-and-typecheck:
-    name: Lint & Type Check
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+    # Job 1: Lint and Type Check (Parallel, ~30s)
+    lint-and-typecheck:
+        name: Lint & Type Check
+        runs-on: ubuntu-latest
+        timeout-minutes: 5
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
 
-      - name: Install dependencies
-        run: npm ci
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: ${{ env.NODE_VERSION }}
+                  cache: 'npm'
 
-      - name: Run ESLint
-        run: npm run lint
+            - name: Install dependencies
+              run: npm ci
 
-      - name: Check code formatting
-        run: npm run format:check
+            - name: Run ESLint
+              run: npm run lint
 
-      - name: Type check
-        run: npm run type-check
-        if: hashFiles('tsconfig.json') != ''
+            - name: Check code formatting
+              run: npm run format:check
 
-  # Job 2: Unit Tests (Parallel, 1-2min)
-  unit-tests:
-    name: Unit Tests
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    
-    strategy:
-      matrix:
-        shard: [1, 2, 3, 4]
-    
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+            - name: Type check
+              run: npm run type-check
+              if: hashFiles('tsconfig.json') != ''
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+    # Job 2: Unit Tests (Parallel, 1-2min)
+    unit-tests:
+        name: Unit Tests
+        runs-on: ubuntu-latest
+        timeout-minutes: 10
 
-      - name: Install dependencies
-        run: npm ci
+        strategy:
+            matrix:
+                shard: [1, 2, 3, 4]
 
-      - name: Run unit tests (shard ${{ matrix.shard }})
-        run: npm run test:unit -- --shard=${{ matrix.shard }}/4
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
 
-      - name: Upload coverage
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage-unit-${{ matrix.shard }}
-          path: coverage/
-          retention-days: 1
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: ${{ env.NODE_VERSION }}
+                  cache: 'npm'
 
-  # Job 3: Integration Tests (Parallel, 2-3min)
-  integration-tests:
-    name: Integration Tests
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    
-    services:
-      postgres:
-        image: postgres:15
-        env:
-          POSTGRES_PASSWORD: postgres
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-        ports:
-          - 5432:5432
+            - name: Install dependencies
+              run: npm ci
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+            - name: Run unit tests (shard ${{ matrix.shard }})
+              run: npm run test:unit -- --shard=${{ matrix.shard }}/4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+            - name: Upload coverage
+              uses: actions/upload-artifact@v4
+              with:
+                  name: coverage-unit-${{ matrix.shard }}
+                  path: coverage/
+                  retention-days: 1
 
-      - name: Install dependencies
-        run: npm ci
+    # Job 3: Integration Tests (Parallel, 2-3min)
+    integration-tests:
+        name: Integration Tests
+        runs-on: ubuntu-latest
+        timeout-minutes: 15
 
-      - name: Run integration tests
-        run: npm run test:integration
-        env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/test
+        services:
+            postgres:
+                image: postgres:15
+                env:
+                    POSTGRES_PASSWORD: postgres
+                options: >-
+                    --health-cmd pg_isready
+                    --health-interval 10s
+                    --health-timeout 5s
+                    --health-retries 5
+                ports:
+                    - 5432:5432
 
-      - name: Upload coverage
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage-integration
-          path: coverage/
-          retention-days: 1
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
 
-  # Job 4: Build (1-2min)
-  build:
-    name: Build Application
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    needs: [lint-and-typecheck]
-    
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: ${{ env.NODE_VERSION }}
+                  cache: 'npm'
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+            - name: Install dependencies
+              run: npm ci
 
-      - name: Install dependencies
-        run: npm ci
+            - name: Run integration tests
+              run: npm run test:integration
+              env:
+                  DATABASE_URL: postgresql://postgres:postgres@localhost:5432/test
 
-      - name: Build application
-        run: npm run build
+            - name: Upload coverage
+              uses: actions/upload-artifact@v4
+              with:
+                  name: coverage-integration
+                  path: coverage/
+                  retention-days: 1
 
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-artifacts
-          path: dist/
-          retention-days: 7
+    # Job 4: Build (1-2min)
+    build:
+        name: Build Application
+        runs-on: ubuntu-latest
+        timeout-minutes: 10
+        needs: [lint-and-typecheck]
 
-  # Job 5: E2E Tests (3-5min, only on non-draft PRs)
-  e2e-tests:
-    name: E2E Tests
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
-    needs: [build]
-    if: github.event.pull_request.draft == false
-    
-    strategy:
-      fail-fast: false
-      matrix:
-        browser: [chromium, firefox, webkit]
-        shard: [1, 2]
-    
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: ${{ env.NODE_VERSION }}
+                  cache: 'npm'
 
-      - name: Install dependencies
-        run: npm ci
+            - name: Install dependencies
+              run: npm ci
 
-      - name: Install Playwright browsers
-        run: npx playwright install --with-deps ${{ matrix.browser }}
+            - name: Build application
+              run: npm run build
 
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: build-artifacts
-          path: dist/
+            - name: Upload build artifacts
+              uses: actions/upload-artifact@v4
+              with:
+                  name: build-artifacts
+                  path: dist/
+                  retention-days: 7
 
-      - name: Run E2E tests
-        run: npx playwright test --project=${{ matrix.browser }} --shard=${{ matrix.shard }}/2
+    # Job 5: E2E Tests (3-5min, only on non-draft PRs)
+    e2e-tests:
+        name: E2E Tests
+        runs-on: ubuntu-latest
+        timeout-minutes: 20
+        needs: [build]
+        if: github.event.pull_request.draft == false
 
-      - name: Upload test results
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: playwright-results-${{ matrix.browser }}-${{ matrix.shard }}
-          path: test-results/
-          retention-days: 7
+        strategy:
+            fail-fast: false
+            matrix:
+                browser: [chromium, firefox, webkit]
+                shard: [1, 2]
 
-      - name: Upload Playwright report
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: playwright-report-${{ matrix.browser }}-${{ matrix.shard }}
-          path: playwright-report/
-          retention-days: 7
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
 
-  # Job 6: Coverage Report (after tests complete)
-  coverage-report:
-    name: Coverage Report
-    runs-on: ubuntu-latest
-    needs: [unit-tests, integration-tests]
-    
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: ${{ env.NODE_VERSION }}
+                  cache: 'npm'
 
-      - name: Download all coverage artifacts
-        uses: actions/download-artifact@v4
-        with:
-          pattern: coverage-*
-          path: coverage/
+            - name: Install dependencies
+              run: npm ci
 
-      - name: Merge coverage reports
-        run: |
-          npm ci
-          npm run coverage:merge
+            - name: Install Playwright browsers
+              run: npx playwright install --with-deps ${{ matrix.browser }}
 
-      - name: Check coverage threshold
-        run: |
-          COVERAGE=$(cat coverage/coverage-summary.json | jq '.total.lines.pct')
-          echo "Coverage: $COVERAGE%"
-          if (( $(echo "$COVERAGE < ${{ env.COVERAGE_THRESHOLD }}" | bc -l) )); then
-            echo "❌ Coverage $COVERAGE% is below threshold ${{ env.COVERAGE_THRESHOLD }}%"
-            exit 1
-          fi
-          echo "✅ Coverage meets threshold"
+            - name: Download build artifacts
+              uses: actions/download-artifact@v4
+              with:
+                  name: build-artifacts
+                  path: dist/
 
-      - name: Upload merged coverage
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage-merged
-          path: coverage/
-          retention-days: 30
+            - name: Run E2E tests
+              run: npx playwright test --project=${{ matrix.browser }} --shard=${{ matrix.shard }}/2
 
-      - name: Comment coverage on PR
-        if: github.event_name == 'pull_request'
-        uses: romeovs/lcov-reporter-action@v0.3.1
-        with:
-          lcov-file: ./coverage/lcov.info
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+            - name: Upload test results
+              if: always()
+              uses: actions/upload-artifact@v4
+              with:
+                  name: playwright-results-${{ matrix.browser }}-${{ matrix.shard }}
+                  path: test-results/
+                  retention-days: 7
 
-  # Job 7: Deploy to Staging (on develop branch)
-  deploy-staging:
-    name: Deploy to Staging
-    runs-on: ubuntu-latest
-    needs: [build, unit-tests, integration-tests]
-    if: github.ref == 'refs/heads/develop' && github.event_name == 'push'
-    environment:
-      name: staging
-      url: https://staging.yourapp.com
-    
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+            - name: Upload Playwright report
+              if: always()
+              uses: actions/upload-artifact@v4
+              with:
+                  name: playwright-report-${{ matrix.browser }}-${{ matrix.shard }}
+                  path: playwright-report/
+                  retention-days: 7
 
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: build-artifacts
-          path: dist/
+    # Job 6: Coverage Report (after tests complete)
+    coverage-report:
+        name: Coverage Report
+        runs-on: ubuntu-latest
+        needs: [unit-tests, integration-tests]
 
-      - name: Deploy to staging
-        run: |
-          echo "Deploying to staging..."
-          # Add your deployment script here
-          # Example: npm run deploy:staging
-        env:
-          DEPLOY_TOKEN: ${{ secrets.STAGING_DEPLOY_TOKEN }}
-          API_KEY: ${{ secrets.STAGING_API_KEY }}
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
 
-      - name: Run smoke tests
-        run: |
-          echo "Running smoke tests..."
-          # npm run test:smoke -- --url=https://staging.yourapp.com
+            - name: Download all coverage artifacts
+              uses: actions/download-artifact@v4
+              with:
+                  pattern: coverage-*
+                  path: coverage/
 
-  # Job 8: Deploy to Production (on main branch)
-  deploy-production:
-    name: Deploy to Production
-    runs-on: ubuntu-latest
-    needs: [build, unit-tests, integration-tests, e2e-tests]
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    environment:
-      name: production
-      url: https://yourapp.com
-    
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+            - name: Merge coverage reports
+              run: |
+                  npm ci
+                  npm run coverage:merge
 
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: build-artifacts
-          path: dist/
+            - name: Check coverage threshold
+              run: |
+                  COVERAGE=$(cat coverage/coverage-summary.json | jq '.total.lines.pct')
+                  echo "Coverage: $COVERAGE%"
+                  if (( $(echo "$COVERAGE < ${{ env.COVERAGE_THRESHOLD }}" | bc -l) )); then
+                    echo "❌ Coverage $COVERAGE% is below threshold ${{ env.COVERAGE_THRESHOLD }}%"
+                    exit 1
+                  fi
+                  echo "✅ Coverage meets threshold"
 
-      - name: Deploy to production
-        run: |
-          echo "Deploying to production..."
-          # Add your deployment script here
-          # Example: npm run deploy:prod
-        env:
-          DEPLOY_TOKEN: ${{ secrets.PROD_DEPLOY_TOKEN }}
-          API_KEY: ${{ secrets.PROD_API_KEY }}
+            - name: Upload merged coverage
+              uses: actions/upload-artifact@v4
+              with:
+                  name: coverage-merged
+                  path: coverage/
+                  retention-days: 30
 
-      - name: Run smoke tests
-        run: |
-          echo "Running smoke tests..."
-          # npm run test:smoke -- --url=https://yourapp.com
+            - name: Comment coverage on PR
+              if: github.event_name == 'pull_request'
+              uses: romeovs/lcov-reporter-action@v0.3.1
+              with:
+                  lcov-file: ./coverage/lcov.info
+                  github-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Create deployment notification
-        if: success()
-        run: |
-          echo "✅ Successfully deployed to production!"
-          # Add notifications (Slack, Discord, etc.)
+    # Job 7: Deploy to Staging (on develop branch)
+    deploy-staging:
+        name: Deploy to Staging
+        runs-on: ubuntu-latest
+        needs: [build, unit-tests, integration-tests]
+        if: github.ref == 'refs/heads/develop' && github.event_name == 'push'
+        environment:
+            name: staging
+            url: https://staging.yourapp.com
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Download build artifacts
+              uses: actions/download-artifact@v4
+              with:
+                  name: build-artifacts
+                  path: dist/
+
+            - name: Deploy to staging
+              run: |
+                  echo "Deploying to staging..."
+                  # Add your deployment script here
+                  # Example: npm run deploy:staging
+              env:
+                  DEPLOY_TOKEN: ${{ secrets.STAGING_DEPLOY_TOKEN }}
+                  API_KEY: ${{ secrets.STAGING_API_KEY }}
+
+            - name: Run smoke tests
+              run: |
+                  echo "Running smoke tests..."
+                  # npm run test:smoke -- --url=https://staging.yourapp.com
+
+    # Job 8: Deploy to Production (on main branch)
+    deploy-production:
+        name: Deploy to Production
+        runs-on: ubuntu-latest
+        needs: [build, unit-tests, integration-tests, e2e-tests]
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        environment:
+            name: production
+            url: https://yourapp.com
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Download build artifacts
+              uses: actions/download-artifact@v4
+              with:
+                  name: build-artifacts
+                  path: dist/
+
+            - name: Deploy to production
+              run: |
+                  echo "Deploying to production..."
+                  # Add your deployment script here
+                  # Example: npm run deploy:prod
+              env:
+                  DEPLOY_TOKEN: ${{ secrets.PROD_DEPLOY_TOKEN }}
+                  API_KEY: ${{ secrets.PROD_API_KEY }}
+
+            - name: Run smoke tests
+              run: |
+                  echo "Running smoke tests..."
+                  # npm run test:smoke -- --url=https://yourapp.com
+
+            - name: Create deployment notification
+              if: success()
+              run: |
+                  echo "✅ Successfully deployed to production!"
+                  # Add notifications (Slack, Discord, etc.)

@@ -1,0 +1,9 @@
+node_modules
+dist
+build
+coverage
+test-results
+playwright-report
+.context/shards
+package-lock.json
+BMAD-METHOD-RESEARCH

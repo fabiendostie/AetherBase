@@ -35,6 +35,7 @@ Are you working solo or with a team?
 **Branches**: `main` only
 
 **Process**:
+
 ```bash
 git checkout main
 # Make changes
@@ -44,11 +45,13 @@ git push
 ```
 
 **Pros**:
+
 - ✅ Simplest possible workflow
 - ✅ No branch management
 - ✅ Immediate deployments
 
 **Cons**:
+
 - ❌ No isolation for experiments
 - ❌ All commits go straight to production
 
@@ -65,6 +68,7 @@ git push
 **Branches**: `main` + optional `feature/*`
 
 **Process**:
+
 ```bash
 git checkout -b feature/new-feature
 # Work on feature
@@ -76,17 +80,20 @@ git push
 ```
 
 **Pros**:
+
 - ✅ Feature isolation
 - ✅ Clean main branch
 - ✅ No team overhead (PRs, approvals)
 - ✅ All quality gates still enforced
 
 **Cons**:
+
 - ❌ Slightly more complexity than trunk-based
 
 **Setup Time**: 10 minutes
 
 **Quality Gates**:
+
 - Git hooks (pre-commit, pre-push)
 - CI/CD (automated testing)
 - Coverage enforcement (85%+)
@@ -102,6 +109,7 @@ git push
 **Branches**: `main`, `develop`, `feature/*`
 
 **Process**:
+
 ```bash
 git checkout -b feature/new-feature
 # Work
@@ -110,17 +118,20 @@ git push origin feature/new-feature
 ```
 
 **Pros**:
+
 - ✅ Code review benefits
 - ✅ Clear separation of development/production
 - ✅ Not too much overhead
 
 **Cons**:
+
 - ❌ Requires PRs and approvals
 - ❌ More branch management
 
 **Setup Time**: 30 minutes
 
 **Quality Gates**:
+
 - Git hooks
 - CI/CD
 - 1 required PR approval
@@ -137,6 +148,7 @@ git push origin feature/new-feature
 **Branches**: `main`, `develop`, `feature/*`, `release/*`, `hotfix/*`
 
 **Process**:
+
 ```bash
 git checkout -b feature/new-feature
 # Work
@@ -147,12 +159,14 @@ git push origin feature/new-feature
 ```
 
 **Pros**:
+
 - ✅ Maximum control
 - ✅ Multiple reviewers
 - ✅ Controlled releases
 - ✅ Hotfix process
 
 **Cons**:
+
 - ❌ Most complex
 - ❌ Slowest (approvals, reviews)
 - ❌ More branch management overhead
@@ -160,6 +174,7 @@ git push origin feature/new-feature
 **Setup Time**: 60 minutes
 
 **Quality Gates**:
+
 - Git hooks
 - CI/CD
 - 2+ required PR approvals
@@ -172,16 +187,16 @@ git push origin feature/new-feature
 
 ## Comparison Table
 
-| Feature | Trunk-Based | Solo Mode | Simplified Gitflow | Full Gitflow |
-|---------|-------------|-----------|-------------------|--------------|
-| **Team Size** | 1 | 1 | 2-5 | 6+ |
-| **Branches** | main | main + feature | main + develop + feature | All |
-| **PRs Required** | No | No | Yes (1 approval) | Yes (2+ approvals) |
-| **Branch Protection** | No | No | Yes | Yes |
-| **Setup Time** | 5 min | 10 min | 30 min | 60 min |
-| **Quality Gates** | Git hooks + CI | Git hooks + CI | All + PR reviews | All + multiple reviews |
-| **Complexity** | ⭐ | ⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐ |
-| **Best For** | Rapid iteration | Solo best practices | Small teams | Large teams |
+| Feature               | Trunk-Based     | Solo Mode           | Simplified Gitflow       | Full Gitflow           |
+| --------------------- | --------------- | ------------------- | ------------------------ | ---------------------- |
+| **Team Size**         | 1               | 1                   | 2-5                      | 6+                     |
+| **Branches**          | main            | main + feature      | main + develop + feature | All                    |
+| **PRs Required**      | No              | No                  | Yes (1 approval)         | Yes (2+ approvals)     |
+| **Branch Protection** | No              | No                  | Yes                      | Yes                    |
+| **Setup Time**        | 5 min           | 10 min              | 30 min                   | 60 min                 |
+| **Quality Gates**     | Git hooks + CI  | Git hooks + CI      | All + PR reviews         | All + multiple reviews |
+| **Complexity**        | ⭐              | ⭐⭐                | ⭐⭐⭐                   | ⭐⭐⭐⭐               |
+| **Best For**          | Rapid iteration | Solo best practices | Small teams              | Large teams            |
 
 ---
 
@@ -190,24 +205,24 @@ git push origin feature/new-feature
 ### Always Required ✅
 
 1. **Conventional Commits**
-   - Format: `type(scope): subject`
-   - Enforced by `commit-msg` hook
+    - Format: `type(scope): subject`
+    - Enforced by `commit-msg` hook
 
 2. **Quality Gates**
-   - Linting (pre-commit)
-   - Formatting (pre-commit)
-   - Testing (pre-push)
-   - Coverage ≥85% (pre-push + CI)
+    - Linting (pre-commit)
+    - Formatting (pre-commit)
+    - Testing (pre-push)
+    - Coverage ≥85% (pre-push + CI)
 
 3. **CI/CD Pipeline**
-   - Automated testing
-   - Coverage reporting
-   - Automated deployment
+    - Automated testing
+    - Coverage reporting
+    - Automated deployment
 
 4. **Git Hooks**
-   - pre-commit: lint + format
-   - commit-msg: validate format
-   - pre-push: tests + coverage
+    - pre-commit: lint + format
+    - commit-msg: validate format
+    - pre-push: tests + coverage
 
 ### Optional (Based on Mode) ⚙️
 
@@ -240,18 +255,23 @@ git push origin feature/new-feature
 ## Recommendation by Project Type
 
 ### Personal Projects / Side Projects
+
 → **Trunk-Based** or **Solo Mode**
 
 ### Freelance / Client Work (Solo)
+
 → **Solo Mode** (keeps clean history)
 
 ### Small Startup (2-5 devs)
+
 → **Simplified Gitflow**
 
 ### Enterprise / Large Team
+
 → **Full Gitflow**
 
 ### Open Source
+
 → **Simplified or Full Gitflow** (depends on contributors)
 
 ---
@@ -281,4 +301,4 @@ All modes support the same quality standards - just different collaboration proc
 
 **The best workflow is the one you'll actually follow!**
 
-*Start simple, add complexity only when needed.*
+_Start simple, add complexity only when needed._

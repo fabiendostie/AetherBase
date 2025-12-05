@@ -41,16 +41,17 @@ git commit -m "Initial commit from template"
 ### Step 3: Update Project Metadata
 
 Edit `.template/project.config.json`:
+
 ```json
 {
-  "name": "my-awesome-project",
-  "version": "0.1.0",
-  "description": "A brief description of your project",
-  "author": "Your Name",
-  "license": "MIT",
-  "languages": ["javascript", "python"],
-  "framework": "express",
-  "repository": "https://github.com/username/repo"
+    "name": "my-awesome-project",
+    "version": "0.1.0",
+    "description": "A brief description of your project",
+    "author": "Your Name",
+    "license": "MIT",
+    "languages": ["javascript", "python"],
+    "framework": "express",
+    "repository": "https://github.com/username/repo"
 }
 ```
 
@@ -63,6 +64,7 @@ Edit `.template/project.config.json`:
 Update the five core documents in `.context/`:
 
 #### 1. instructions.md
+
 ```markdown
 Replace [PROJECT_NAME] with your actual project name
 Add project-specific architectural patterns
@@ -71,6 +73,7 @@ Specify testing requirements
 ```
 
 #### 2. knowledge.md
+
 ```markdown
 List your technology stack with versions
 Create knowledge shards for your specific domain
@@ -79,6 +82,7 @@ Define your domain glossary
 ```
 
 #### 3. tools.md
+
 ```markdown
 Configure LSP servers for your languages
 Define your build system commands
@@ -87,6 +91,7 @@ Set environment variables
 ```
 
 #### 4. summary.md
+
 ```markdown
 Write initial project overview
 Document architectural decisions
@@ -95,6 +100,7 @@ Define milestones
 ```
 
 #### 5. rules.md
+
 ```markdown
 Set naming conventions for your language(s)
 Define code style rules
@@ -109,6 +115,7 @@ Set security policies
 ### Development Environment
 
 #### For Node.js Projects
+
 ```bash
 # Initialize package.json
 npm init -y
@@ -128,6 +135,7 @@ npm install --save-dev eslint prettier typescript
 ```
 
 #### For Python Projects
+
 ```bash
 # Create virtual environment
 python -m venv venv
@@ -148,7 +156,9 @@ pip install -r requirements.txt
 ```
 
 #### For Other Languages
+
 Follow your language-specific initialization:
+
 - **Go**: `go mod init`
 - **Rust**: `cargo init`
 - **Java**: Maven or Gradle setup
@@ -163,11 +173,13 @@ Follow your language-specific initialization:
 Configure LSP servers for your primary languages:
 
 #### JavaScript/TypeScript
+
 ```bash
 npm install -g typescript-language-server
 ```
 
 #### Python
+
 ```bash
 pip install python-lsp-server
 # or
@@ -175,6 +187,7 @@ pip install pyright
 ```
 
 #### Other Languages
+
 - **Go**: `go install golang.org/x/tools/gopls@latest`
 - **Rust**: `rustup component add rust-analyzer`
 - **Java**: Install Java Language Server
@@ -190,6 +203,7 @@ Update `.context/tools.md` with your LSP configuration.
 Choose structure based on project type:
 
 #### Web Application
+
 ```
 src/
 ├── components/     # UI components
@@ -202,6 +216,7 @@ src/
 ```
 
 #### REST API
+
 ```
 src/
 ├── controllers/    # Request handlers
@@ -214,6 +229,7 @@ src/
 ```
 
 #### Library/Package
+
 ```
 src/
 ├── lib/            # Main library code
@@ -226,26 +242,30 @@ src/
 ### 2. Testing Setup
 
 #### Jest (JavaScript)
+
 ```bash
 npm install --save-dev jest @types/jest
 ```
 
 Create `jest.config.js`:
+
 ```javascript
 module.exports = {
-  testEnvironment: 'node',
-  coverageDirectory: 'coverage',
-  collectCoverageFrom: ['src/**/*.js'],
-  testMatch: ['**/*.test.js'],
+    testEnvironment: 'node',
+    coverageDirectory: 'coverage',
+    collectCoverageFrom: ['src/**/*.js'],
+    testMatch: ['**/*.test.js'],
 };
 ```
 
 #### pytest (Python)
+
 ```bash
 pip install pytest pytest-cov
 ```
 
 Create `pytest.ini`:
+
 ```ini
 [pytest]
 testpaths = tests
@@ -257,6 +277,7 @@ python_functions = test_*
 ### 3. Configuration Files
 
 #### Create .gitignore
+
 ```bash
 # Use the provided template or generate one
 # Example for Node.js:
@@ -269,6 +290,7 @@ coverage/
 ```
 
 #### Create .editorconfig
+
 ```ini
 root = true
 
@@ -287,6 +309,7 @@ trim_trailing_whitespace = false
 ### 4. Workflow Integration
 
 #### Install Workflow Tools
+
 ```bash
 # Install core workflow dependencies
 npm install -D husky @commitlint/cli @commitlint/config-conventional
@@ -297,25 +320,30 @@ npx husky init
 ```
 
 #### Configure Quality Gates
+
 The template comes with pre-configured Husky hooks in `.husky/`:
+
 - `pre-commit`: Runs linting and type checking
 - `commit-msg`: Enforces conventional commits
 - `pre-push`: Runs tests and checks coverage (85% threshold)
 
 #### Configure CI/CD
+
 The template includes a comprehensive GitHub Actions pipeline in `.github/workflows/ci-cd.yml`.
 
 **Required Secrets:**
 Add these to your GitHub Repository Secrets:
+
 - `STAGING_DEPLOY_TOKEN`
 - `PROD_DEPLOY_TOKEN`
 - `STAGING_DATABASE_URL`
 - `PROD_DATABASE_URL`
 
 **Workflow Modes:**
+
 - **Team**: Enable branch protection and PR approvals.
 - **Solo**: Skip branch protection, use direct commits or simplified PRs.
-See `.workflows/workflow-modes.md` for details.
+  See `.workflows/workflow-modes.md` for details.
 
 ---
 
@@ -369,6 +397,7 @@ python setup.py build
 ### Common Issues
 
 **Issue**: LSP not working
+
 ```bash
 # Solution: Verify LSP server installation
 npm list -g typescript-language-server
@@ -377,6 +406,7 @@ pip show python-lsp-server
 ```
 
 **Issue**: Tests failing
+
 ```bash
 # Solution: Check test configuration
 npm run test -- --verbose
@@ -385,6 +415,7 @@ pytest -v
 ```
 
 **Issue**: Linting errors
+
 ```bash
 # Solution: Auto-fix where possible
 npm run lint -- --fix

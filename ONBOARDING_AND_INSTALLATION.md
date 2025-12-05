@@ -1,4 +1,5 @@
 # 🚀 Onboarding & Installation Guide
+
 **Version:** 1.0.0
 **Date:** 2025-12-05T00:50:00-05:00
 **Status:** Verified
@@ -12,13 +13,15 @@ Welcome to **AetherBase**, a universal project template powered by the **BMad Me
 Before you begin, ensure you have the following tools installed. We recommend the latest stable versions as of December 2025.
 
 ### 1. Core Runtime & Languages
-| Tool | Version | Download Link | Purpose |
-|------|---------|---------------|---------|
-| **Node.js** | v24.11.0+ (LTS) | [Download Node.js](https://nodejs.org/en/download/) | JavaScript runtime for tooling and agents. |
-| **Python** | v3.14.0+ | [Download Python](https://www.python.org/downloads/) | Required for advanced data processing and AI scripts. |
-| **Git** | v2.52.0+ | [Download Git](https://git-scm.com/downloads) | Version control system. |
+
+| Tool        | Version         | Download Link                                        | Purpose                                               |
+| ----------- | --------------- | ---------------------------------------------------- | ----------------------------------------------------- |
+| **Node.js** | v24.11.0+ (LTS) | [Download Node.js](https://nodejs.org/en/download/)  | JavaScript runtime for tooling and agents.            |
+| **Python**  | v3.14.0+        | [Download Python](https://www.python.org/downloads/) | Required for advanced data processing and AI scripts. |
+| **Git**     | v2.52.0+        | [Download Git](https://git-scm.com/downloads)        | Version control system.                               |
 
 ### 2. Development Environment (IDE)
+
 Choose **one** of the following AI-native IDEs for the best experience:
 
 - **Cursor** (Recommended): [Download Cursor](https://cursor.sh/)
@@ -32,6 +35,7 @@ Choose **one** of the following AI-native IDEs for the best experience:
 ### Phase 1: Project Setup
 
 1.  **Clone the Repository**
+
     ```bash
     git clone https://github.com/fabiendostie/AetherBase my-new-project
     cd my-new-project
@@ -39,10 +43,11 @@ Choose **one** of the following AI-native IDEs for the best experience:
 
 2.  **Install Dependencies**
     We use `npm` for managing project tools and `husky` for git hooks.
+
     ```bash
     # Install project dependencies
     npm install
-    
+
     # Verify TypeScript installation
     npm list typescript
     # Expected: typescript@5.9.3 or higher
@@ -98,9 +103,11 @@ The **BMad Method** provides the specialized AI agents and workflows.
 Let's test the system by running a simple "Quick Flow" to add a feature.
 
 1.  **Summon the Agent**:
+
     > "Act as **Barry** (Quick Flow Solo Dev). I want to start a new task."
 
 2.  **Define the Task**:
+
     > "I need to create a simple 'Hello World' API endpoint."
 
 3.  **Follow the Steps**:

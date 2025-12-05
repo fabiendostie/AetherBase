@@ -3,26 +3,31 @@ Optimal context engineering documents encompass several types of documents, each
 Here is a description of the key documents and how to use them efficiently:
 
 ### 1. Instructional Context Documents
+
 - **Purpose:** Provide high-level instructions, roles, and task-specific guidance to the AI.
 - **Contents:** System role descriptions, task definitions, constraints, and formatting requirements (e.g., output style or data format).
 - **How to Use:** Clearly specify what you want from the AI, including examples of desired outputs. Use these instructions as templates that can be reused and adapted for different tasks, ensuring clarity and precision to avoid ambiguity.
 
 ### 2. Knowledge Context Documents
+
 - **Purpose:** Supply relevant domain information, facts, or data that the AI needs for accurate responses.
 - **Contents:** Relevant portions of manuals, design documents, API specifications, data snippets, or retrieved external documents.
 - **How to Use:** Use retrieval augmented generation (RAG) techniques to select and inject the most relevant knowledge context dynamically. Summarize long texts and highlight key points for quick AI comprehension, avoiding overwhelming the model with excessive information.
 
 ### 3. Tools and Environment Context Documents
+
 - **Purpose:** Describe external tools, APIs, or environment interfaces that the AI can interact with to fetch real-time or specialized data.
 - **Contents:** Tool definitions, API call formats, sample queries, and descriptions of tool outputs.
 - **How to Use:** Dynamically include the relevant tool context based on the task. Keep tool context modular to avoid cluttering the input and ensure the AI knows how to execute and interpret tool results effectively.
 
 ### 4. Context Management and Summarization Documents
+
 - **Purpose:** Manage and optimize the use of the limited context window size by summarizing and compressing ongoing interactions or long documents.
 - **Contents:** Summaries of previous conversations, key decisions, architectural choices, and critical facts.
 - **How to Use:** Use automated summarization to keep the AI's working context manageable for long-duration or multi-step tasks. Use strategic condensation of information while preserving essential details to maintain coherence.
 
 ### Efficient Use Guidelines:
+
 - Prioritize **relevance over volume**—only include context that directly impacts the task.
 - Use **clear sectioning and labels** (e.g., "User Input:", "Background:", "Instructions:") for easy parsing by the AI.
 - Maintain **modular and reusable templates** for common contexts to save effort and enforce consistency.

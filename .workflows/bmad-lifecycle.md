@@ -7,39 +7,47 @@ This document outlines the **4-Phase Methodology** of the BMAD framework and the
 ## 🔄 The 4-Phase Methodology
 
 ### Phase 1: 📊 Analysis (Optional)
+
 **Goal**: Brainstorm, research, and explore solutions.
 **Agents**: Product Manager, Analyst
 **Workflows**:
+
 - `market-research`: Analyze competitors and market trends.
 - `feasibility-study`: Assess technical viability.
 
 ### Phase 2: 📝 Planning
+
 **Goal**: Create authoritative specifications.
 **Agents**: Product Manager
 **Workflows**:
+
 - `create-prd`: Generate a Product Requirements Document (PRD).
-  - **Input**: Raw ideas, user interviews.
-  - **Output**: `docs/planning/PRD.md`
+    - **Input**: Raw ideas, user interviews.
+    - **Output**: `docs/planning/PRD.md`
 - `create-epics-and-stories`: Break down PRD into actionable items.
-  - **Output**: `docs/planning/epics.md`, `docs/planning/stories.md`
+    - **Output**: `docs/planning/epics.md`, `docs/planning/stories.md`
 
 ### Phase 3: 🏗️ Solutioning
+
 **Goal**: Design architecture, UX, and technical approach.
 **Agents**: Architect, UX Designer
 **Workflows**:
+
 - `create-architecture`: Define system design, stack, and patterns.
-  - **Output**: `docs/architecture/system-design.md`
+    - **Output**: `docs/architecture/system-design.md`
 - `implementation-readiness`: Validate alignment of PRD, Architecture, and Stories.
-  - **Output**: Readiness Report
+    - **Output**: Readiness Report
 
 ### Phase 4: ⚡ Implementation
+
 **Goal**: Story-driven development with continuous validation.
 **Agents**: Developer, Test Architect
 **Workflows**:
+
 - `develop-story`: Implement a specific user story.
-  - **Input**: User Story file
-  - **Process**: Red-Green-Refactor
-  - **Output**: Working code + Tests
+    - **Input**: User Story file
+    - **Process**: Red-Green-Refactor
+    - **Output**: Working code + Tests
 - `code-review`: AI-driven code review against standards.
 
 ---
@@ -65,4 +73,4 @@ docs/
 
 ---
 
-*Refer to `.context/bmad_roles.md` for detailed agent definitions.*
+_Refer to `.context/bmad_roles.md` for detailed agent definitions._

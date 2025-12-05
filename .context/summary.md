@@ -3,6 +3,7 @@
 ## Context Management and Summarization
 
 ### Purpose
+
 This document maintains summaries of ongoing work, key decisions, architectural choices, and critical facts. Following TELIS methodology for efficient context window management in long-duration tasks.
 
 ---
@@ -21,11 +22,13 @@ This document maintains summaries of ongoing work, key decisions, architectural 
 [Brief 2-3 sentence overview of the project]
 
 ### Key Objectives
+
 1. [Primary objective]
 2. [Secondary objective]
 3. [Tertiary objective]
 
 ### Current Phase
+
 [Description of current development phase]
 
 ---
@@ -35,6 +38,7 @@ This document maintains summaries of ongoing work, key decisions, architectural 
 ### Decision Log
 
 #### [Decision Title 1]
+
 **Date**: [YYYY-MM-DD]  
 **Status**: [Accepted|Proposed|Deprecated]  
 **Context**: [Why this decision was needed]  
@@ -42,6 +46,7 @@ This document maintains summaries of ongoing work, key decisions, architectural 
 **Consequences**: [Implications of this decision]
 
 #### [Decision Title 2]
+
 **Date**: [YYYY-MM-DD]  
 **Status**: [Accepted|Proposed|Deprecated]  
 **Context**: [Why this decision was needed]  
@@ -55,15 +60,18 @@ This document maintains summaries of ongoing work, key decisions, architectural 
 ### [Current Sprint/Phase]
 
 **Completed**:
+
 - [x] [Task 1]
 - [x] [Task 2]
 - [x] [Task 3]
 
 **In Progress**:
+
 - [ ] [Task 4]
 - [ ] [Task 5]
 
 **Blocked**:
+
 - [ ] [Task 6] - [Blocker description]
 
 ---
@@ -71,14 +79,17 @@ This document maintains summaries of ongoing work, key decisions, architectural 
 ## Critical Facts
 
 ### System Constraints
+
 - [Constraint 1]: [Description and impact]
 - [Constraint 2]: [Description and impact]
 
 ### Performance Requirements
+
 - [Requirement 1]: [Metric and target]
 - [Requirement 2]: [Metric and target]
 
 ### Dependencies
+
 - [Critical dependency 1]: [Version and importance]
 - [Critical dependency 2]: [Version and importance]
 
@@ -89,12 +100,14 @@ This document maintains summaries of ongoing work, key decisions, architectural 
 Following TELIS principles for maintaining coherent context in long tasks:
 
 ### Summarization Triggers
+
 - Every 10 significant code changes
 - After major architectural decisions
 - At end of each development sprint
 - When context window utilization exceeds 70%
 
 ### Compression Techniques
+
 1. **Bullet Point Summaries**: Condensed decision rationale
 2. **Reference Links**: Point to detailed docs rather than duplicating
 3. **Symbolic Encoding**: Use shorthand for repeated concepts
@@ -105,16 +118,19 @@ Following TELIS principles for maintaining coherent context in long tasks:
 ## Key Takeaways
 
 ### What Works Well
+
 - [Success 1]
 - [Success 2]
 - [Success 3]
 
 ### Lessons Learned
+
 - [Lesson 1]
 - [Lesson 2]
 - [Lesson 3]
 
 ### Known Issues
+
 - [Issue 1]: [Impact and status]
 - [Issue 2]: [Impact and status]
 
@@ -123,11 +139,13 @@ Following TELIS principles for maintaining coherent context in long tasks:
 ## Conversation History Summary
 
 ### [Date Range 1]
+
 **Focus**: [Main topic]  
 **Key Outcomes**: [Summary of achievements]  
 **Open Questions**: [Unresolved items]
 
 ### [Date Range 2]
+
 **Focus**: [Main topic]  
 **Key Outcomes**: [Summary of achievements]  
 **Open Questions**: [Unresolved items]
@@ -137,11 +155,13 @@ Following TELIS principles for maintaining coherent context in long tasks:
 ## Next Steps
 
 ### Immediate Priorities
+
 1. [Priority 1] - [Target date]
 2. [Priority 2] - [Target date]
 3. [Priority 3] - [Target date]
 
 ### Upcoming Milestones
+
 - **[Milestone 1]**: [Date] - [Description]
 - **[Milestone 2]**: [Date] - [Description]
 
@@ -150,6 +170,7 @@ Following TELIS principles for maintaining coherent context in long tasks:
 ## Essential Context Preservation
 
 **Critical Information to Always Include**:
+
 - Project goals and constraints
 - Current architecture patterns
 - Active development context
@@ -157,6 +178,7 @@ Following TELIS principles for maintaining coherent context in long tasks:
 - Recent significant changes
 
 **Information to Prune**:
+
 - Resolved issues (keep reference links only)
 - Superseded decisions
 - Outdated implementation details
@@ -178,4 +200,4 @@ This prevents context overload while ensuring coherence.
 
 ---
 
-*This document is part of the `.context/` directory following TELIS context management principles - maintain summaries and compress information strategically while preserving essential details.*
+_This document is part of the `.context/` directory following TELIS context management principles - maintain summaries and compress information strategically while preserving essential details._

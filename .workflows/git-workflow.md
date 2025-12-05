@@ -9,12 +9,14 @@ Complete guide to Git workflow standards using **Gitflow** methodology and **Con
 ## Overview
 
 This project follows a structured Git workflow to ensure:
+
 - **Code quality** through automated checks
 - **Clear history** with conventional commits
 - **Safe deployments** with branch protection (teams)
 - **Collaborative development** with pull requests (teams)
 
 **Workflow Modes**:
+
 - **Team Mode**: Full Gitflow with PRs, approvals, and branch protection
 - **Solo Mode**: Simplified workflow, direct commits, automated quality gates
 
@@ -25,12 +27,14 @@ This project follows a structured Git workflow to ensure:
 ### Main Branches
 
 #### `main`
+
 - **Purpose**: Production-ready code only
 - **Protection**: ✅ Protected, requires PR + reviews
 - **Deploys to**: Production environment
 - **Never commit directly**: All changes via PR from `develop` or `hotfix/*`
 
 #### `develop`
+
 - **Purpose**: Integration branch for features
 - **Protection**: ✅ Protected, requires PR + reviews
 - **Deploys to**: Staging environment
@@ -39,6 +43,7 @@ This project follows a structured Git workflow to ensure:
 ### Supporting Branches
 
 #### `feature/*`
+
 **Format**: `feature/[issue-number]-[brief-description]`
 
 ```bash
@@ -49,11 +54,13 @@ feature/789-dashboard-redesign
 ```
 
 **Lifecycle**:
+
 1. Branch from: `develop`
 2. Merge back to: `develop`
 3. Delete after: Merge complete
 
 **Commands**:
+
 ```bash
 # Create feature branch
 git checkout develop
@@ -70,6 +77,7 @@ git push origin feature/123-user-auth
 ```
 
 #### `release/*`
+
 **Format**: `release/v[major].[minor].[patch]`
 
 ```bash
@@ -80,12 +88,14 @@ release/v2.0.0-beta.1
 ```
 
 **Lifecycle**:
+
 1. Branch from: `develop`
 2. Merge back to: `main` and `develop`
 3. Tag: Version number on `main`
 4. Delete after: Merge complete
 
 **Commands**:
+
 ```bash
 # Create release branch
 git checkout develop
@@ -113,6 +123,7 @@ git push origin --delete release/v1.0.0
 ```
 
 #### `hotfix/*`
+
 **Format**: `hotfix/[issue-number]-[brief-description]`
 
 ```bash
@@ -122,12 +133,14 @@ hotfix/912-payment-bug
 ```
 
 **Lifecycle**:
+
 1. Branch from: `main`
 2. Merge back to: `main` and `develop`
 3. Tag: Patch version on `main`
 4. Delete after: Merge complete
 
 **Commands**:
+
 ```bash
 # Create hotfix branch
 git checkout main
@@ -169,30 +182,30 @@ type(scope): subject
 
 ### Types
 
-| Type | Description | Example |
-|------|-------------|---------|
-| `feat` | New feature | `feat(auth): add OAuth2 login` |
-| `fix` | Bug fix | `fix(api): resolve timeout on large requests` |
-| `docs` | Documentation only | `docs(readme): update installation steps` |
-| `style` | Code style/formatting | `style(components): fix indentation` |
-| `refactor` | Code restructuring | `refactor(utils): simplify date formatting` |
-| `perf` | Performance improvement | `perf(query): optimize database indexes` |
-| `test` | Add/update tests | `test(auth): add unit tests for login` |
-| `chore` | Maintenance tasks | `chore(deps): update dependencies` |
-| `ci` | CI/CD changes | `ci(github): add deployment workflow` |
-| `build` | Build system changes | `build(webpack): update config` |
-| `revert` | Revert previous commit | `revert: feat(auth): add OAuth2 login` |
+| Type       | Description             | Example                                       |
+| ---------- | ----------------------- | --------------------------------------------- |
+| `feat`     | New feature             | `feat(auth): add OAuth2 login`                |
+| `fix`      | Bug fix                 | `fix(api): resolve timeout on large requests` |
+| `docs`     | Documentation only      | `docs(readme): update installation steps`     |
+| `style`    | Code style/formatting   | `style(components): fix indentation`          |
+| `refactor` | Code restructuring      | `refactor(utils): simplify date formatting`   |
+| `perf`     | Performance improvement | `perf(query): optimize database indexes`      |
+| `test`     | Add/update tests        | `test(auth): add unit tests for login`        |
+| `chore`    | Maintenance tasks       | `chore(deps): update dependencies`            |
+| `ci`       | CI/CD changes           | `ci(github): add deployment workflow`         |
+| `build`    | Build system changes    | `build(webpack): update config`               |
+| `revert`   | Revert previous commit  | `revert: feat(auth): add OAuth2 login`        |
 
 ### Rules
 
 1. **Type**: Required, lowercase, from approved list
 2. **Scope**: Optional, lowercase, represents affected area
-3. **Subject**: 
-   - Required
-   - Lowercase
-   - No period at the end
-   - Maximum 100 characters
-   - Imperative mood ("add" not "added" or "adds")
+3. **Subject**:
+    - Required
+    - Lowercase
+    - No period at the end
+    - Maximum 100 characters
+    - Imperative mood ("add" not "added" or "adds")
 
 ### Examples
 
@@ -256,6 +269,7 @@ git push origin feature/123-new-feature
 ```
 
 Create PR on GitHub with:
+
 - **Title**: Brief description
 - **Description**: What changed and why
 - **Link issues**: Closes #123
@@ -264,6 +278,7 @@ Create PR on GitHub with:
 ### 4. Automated Checks Run
 
 CI/CD pipeline runs:
+
 - ✓ Lint & Type Check (~30s)
 - ✓ Unit Tests (~2min)
 - ✓ Integration Tests (~3min)
@@ -300,6 +315,7 @@ git push origin --delete feature/123-new-feature
 > **Note**: Branch protection is **recommended for teams**, **optional for solo developers**.
 >
 > Solo developers can skip branch protection and rely on:
+>
 > - Git hooks (local quality gates)
 > - CI/CD (automated testing)
 > - Personal discipline
@@ -396,6 +412,7 @@ git branch -d feature/456-new-widget
 ### Best Practices
 
 ✅ **DO** commit:
+
 - After completing a discrete unit of work
 - After each passing test
 - Before switching contexts
@@ -403,6 +420,7 @@ git branch -d feature/456-new-widget
 - After fixing each bug
 
 ❌ **DON'T** commit:
+
 - Broken/non-compiling code (unless WIP clearly marked)
 - Commented-out code
 - Debugging statements
@@ -426,12 +444,12 @@ git branch -d feature/456-new-widget
 
 All hooks run automatically:
 
-| Hook | When | What It Does | Duration |
-|------|------|--------------|----------|
-| `pre-commit` | Before commit | Lint, format, type check | ~5-10s |
-| `commit-msg` | After commit message | Validate conventional format | ~1s |
-| `pre-push` | Before push | Run tests, check coverage | ~2-5min |
-| `post-merge` | After merge/pull | Update dependencies | ~10-30s |
+| Hook         | When                 | What It Does                 | Duration |
+| ------------ | -------------------- | ---------------------------- | -------- |
+| `pre-commit` | Before commit        | Lint, format, type check     | ~5-10s   |
+| `commit-msg` | After commit message | Validate conventional format | ~1s      |
+| `pre-push`   | Before push          | Run tests, check coverage    | ~2-5min  |
+| `post-merge` | After merge/pull     | Update dependencies          | ~10-30s  |
 
 ---
 
@@ -496,4 +514,4 @@ git branch --merged | grep -v "\*\|main\|develop" | xargs git branch -d
 
 ---
 
-*This workflow ensures code quality, clear history, and safe deployments. Follow it consistently for best results!*
+_This workflow ensures code quality, clear history, and safe deployments. Follow it consistently for best results!_

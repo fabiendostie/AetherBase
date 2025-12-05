@@ -1,10 +1,6 @@
 ---
-
-
 ### 2. Follow the Onboarding Guide
 Open `ONBOARDING_AND_INSTALLATION.md` and follow the step-by-step instructions to set up your environment, install dependencies, and configure the AI agents.
-
-
 ---
 
 ## 📁 Project Structure
@@ -65,19 +61,19 @@ This template implements the **Token-Efficient Language Intelligence System** to
 ### Three-Layer Architecture
 
 1. **Layer 1: LSP Symbiosis** (Real-time Truth)
-   - Real-time type signatures and API data
-   - 90% token savings vs traditional documentation
-   - 100% accuracy for language features
+    - Real-time type signatures and API data
+    - 90% token savings vs traditional documentation
+    - 100% accuracy for language features
 
 2. **Layer 2: Knowledge Shards** (Pattern Libraries)
-   - Tiered information (Nano → Micro → Full)
-   - Semantic retrieval with confidence thresholds
-   - Token budgets of 50/500/2000+
+    - Tiered information (Nano → Micro → Full)
+    - Semantic retrieval with confidence thresholds
+    - Token budgets of 50/500/2000+
 
 3. **Layer 3: Progressive Context Negotiation**
-   - On-demand information escalation
-   - AI requests specific data rather than eagerly loading
-   - 95% token savings on complex queries
+    - On-demand information escalation
+    - AI requests specific data rather than eagerly loading
+    - 95% token savings on complex queries
 
 See [TELIS.md](TELIS.md) for complete methodology documentation.
 
@@ -88,11 +84,13 @@ See [TELIS.md](TELIS.md) for complete methodology documentation.
 This template integrates the **BMAD (Breakthrough Method for Agile Ai Driven Development)** framework.
 
 ### Key Features
+
 - **19 Specialized Agents**: Switch roles instantly (e.g., "Act as Architect").
 - **4-Phase Methodology**: Analysis → Planning → Solutioning → Implementation.
 - **Structured Workflows**: Pre-defined paths for PRDs, Architecture, and Coding.
 
 ### Quick Start
+
 1.  **Switch Role**: "Act as Product Manager"
 2.  **Start Planning**: "Run create-prd"
 3.  **Switch Role**: "Act as Architect"
@@ -108,15 +106,16 @@ See [.context/bmad_roles.md](.context/bmad_roles.md) and [.workflows/bmad-lifecy
 
 The `.context/` directory contains five core documents:
 
-| Document | Purpose | Token Budget |
-|----------|---------|--------------|
-| **instructions.md** | AI role, task guidance, output formatting | N/A |
-| **knowledge.md** | Domain info organized in tiers (50/500/2000+) | Dynamic |
-| **tools.md** | LSP integration, APIs, environment config | On-demand |
-| **summary.md** | Decision logs, work summaries, context compression | Growing |
-| **rules.md** | Project rules, coding standards, constraints | N/A |
+| Document            | Purpose                                            | Token Budget |
+| ------------------- | -------------------------------------------------- | ------------ |
+| **instructions.md** | AI role, task guidance, output formatting          | N/A          |
+| **knowledge.md**    | Domain info organized in tiers (50/500/2000+)      | Dynamic      |
+| **tools.md**        | LSP integration, APIs, environment config          | On-demand    |
+| **summary.md**      | Decision logs, work summaries, context compression | Growing      |
+| **rules.md**        | Project rules, coding standards, constraints       | N/A          |
 
 These documents enable AI systems to:
+
 - Generate code with <2% error rate
 - Use 10-100x fewer tokens than traditional approaches
 - Maintain context across long development sessions
@@ -129,19 +128,21 @@ These documents enable AI systems to:
 ### 1. Update Project Configuration
 
 Edit `.template/project.config.json`:
+
 ```json
 {
-  "name": "your-project-name",
-  "version": "0.1.0",
-  "description": "Your project description",
-  "languages": ["javascript", "python"],
-  "framework": "your-framework"
+    "name": "your-project-name",
+    "version": "0.1.0",
+    "description": "Your project description",
+    "languages": ["javascript", "python"],
+    "framework": "your-framework"
 }
 ```
 
 ### 2. Customize Context Documents
 
 Update each file in `.context/`:
+
 - Add your tech stack to `knowledge.md`
 - Configure LSP servers in `tools.md`
 - Define coding standards in `rules.md`
@@ -150,6 +151,7 @@ Update each file in `.context/`:
 ### 3. Adapt Folder Structure
 
 Modify `src/` structure based on your needs:
+
 - **Web App**: `src/components/`, `src/pages/`, `src/services/`
 - **API**: `src/controllers/`, `src/models/`, `src/routes/`
 - **Library**: `src/lib/`, `src/types/`, `src/index.js`
@@ -157,6 +159,7 @@ Modify `src/` structure based on your needs:
 ### 4. Configure Tools
 
 Set up language-specific tools:
+
 ```bash
 # JavaScript/TypeScript
 npm init
@@ -174,12 +177,12 @@ pip install pylint mypy
 
 Following TELIS methodology error rate targets:
 
-| Error Type | Target | Validation |
-|------------|--------|------------|
-| Syntax Errors | <0.5% | AST parsing |
-| Type Errors | <1.0% | Type checker |
-| API Misuse | <0.5% | Runtime validation |
-| **Total** | **<2.0%** | Combined metrics |
+| Error Type    | Target    | Validation         |
+| ------------- | --------- | ------------------ |
+| Syntax Errors | <0.5%     | AST parsing        |
+| Type Errors   | <1.0%     | Type checker       |
+| API Misuse    | <0.5%     | Runtime validation |
+| **Total**     | **<2.0%** | Combined metrics   |
 
 ---
 
@@ -198,6 +201,7 @@ Following TELIS methodology error rate targets:
 This template is optimized for AI-assisted development:
 
 ### Progressive Context Protocol
+
 ```
 1. AI starts with Tier 1 (nano) knowledge shards
 2. AI requests specific information as needed
@@ -206,6 +210,7 @@ This template is optimized for AI-assisted development:
 ```
 
 ### Example Interaction
+
 ```
 User: "Add a function to process user data"
 
@@ -236,20 +241,22 @@ AI: [Generates validated, type-safe code]
 MIT License
 
 ---
-│   ├── development/        # Development environment
-│   ├── testing/            # Testing environment
-│   └── production/         # Production environment
+
+│ ├── development/ # Development environment
+│ ├── testing/ # Testing environment
+│ └── production/ # Production environment
 │
-├── scripts/                # Utility Scripts
-│   └── [automation scripts]
+├── scripts/ # Utility Scripts
+│ └── [automation scripts]
 │
-├── .gitignore              # Git ignore patterns
-├── .editorconfig           # Editor configuration
-├── README.md               # This file
-├── PROJECT_SETUP.md        # Detailed setup instructions
-├── STRUCTURE_GUIDE.md      # Folder structure guide
-└── TELIS.md                # TELIS methodology documentation
-```
+├── .gitignore # Git ignore patterns
+├── .editorconfig # Editor configuration
+├── README.md # This file
+├── PROJECT_SETUP.md # Detailed setup instructions
+├── STRUCTURE_GUIDE.md # Folder structure guide
+└── TELIS.md # TELIS methodology documentation
+
+````
 
 ---
 
@@ -332,26 +339,29 @@ Edit `.template/project.config.json`:
   "languages": ["javascript", "python"],
   "framework": "your-framework"
 }
-```
+````
 
 ### 2. Customize Context Documents
 
 Update each file in `.context/`:
--   Add your tech stack to `knowledge.md`
--   Configure LSP servers in `tools.md`
--   Define coding standards in `rules.md`
--   Set system role in `instructions.md`
+
+- Add your tech stack to `knowledge.md`
+- Configure LSP servers in `tools.md`
+- Define coding standards in `rules.md`
+- Set system role in `instructions.md`
 
 ### 3. Adapt Folder Structure
 
 Modify `src/` structure based on your needs:
--   **Web App**: `src/components/`, `src/pages/`, `src/services/`
--   **API**: `src/controllers/`, `src/models/`, `src/routes/`
--   **Library**: `src/lib/`, `src/types/`, `src/index.js`
+
+- **Web App**: `src/components/`, `src/pages/`, `src/services/`
+- **API**: `src/controllers/`, `src/models/`, `src/routes/`
+- **Library**: `src/lib/`, `src/types/`, `src/index.js`
 
 ### 4. Configure Tools
 
 Set up language-specific tools:
+
 ```bash
 # JavaScript/TypeScript
 npm init
@@ -369,22 +379,22 @@ pip install pylint mypy
 
 Following TELIS methodology error rate targets:
 
-| Error Type | Target | Validation |
-|------------|--------|------------|
-| Syntax Errors | <0.5% | AST parsing |
-| Type Errors | <1.0% | Type checker |
-| API Misuse | <0.5% | Runtime validation |
-| **Total** | **<2.0%** | Combined metrics |
+| Error Type    | Target    | Validation         |
+| ------------- | --------- | ------------------ |
+| Syntax Errors | <0.5%     | AST parsing        |
+| Type Errors   | <1.0%     | Type checker       |
+| API Misuse    | <0.5%     | Runtime validation |
+| **Total**     | **<2.0%** | Combined metrics   |
 
 ---
 
 ## 📖 Documentation
 
--   **[PROJECT_SETUP.md](PROJECT_SETUP.md)** - Detailed setup instructions
--   **[STRUCTURE_GUIDE.md](STRUCTURE_GUIDE.md)** - Folder organization guide
--   **[TELIS.md](TELIS.md)** - Complete methodology reference
--   **[INTEGRATION_GUIDE.md](INTEGRATION_GUIDE.md)** - Detailed 4-phase integration roadmap
--   **[docs/](docs/)** - Additional project documentation
+- **[PROJECT_SETUP.md](PROJECT_SETUP.md)** - Detailed setup instructions
+- **[STRUCTURE_GUIDE.md](STRUCTURE_GUIDE.md)** - Folder organization guide
+- **[TELIS.md](TELIS.md)** - Complete methodology reference
+- **[INTEGRATION_GUIDE.md](INTEGRATION_GUIDE.md)** - Detailed 4-phase integration roadmap
+- **[docs/](docs/)** - Additional project documentation
 
 ---
 
@@ -393,6 +403,7 @@ Following TELIS methodology error rate targets:
 This template is optimized for AI-assisted development:
 
 ### Progressive Context Protocol
+
 ```
 1. AI starts with Tier 1 (nano) knowledge shards
 2. AI requests specific information as needed
@@ -401,6 +412,7 @@ This template is optimized for AI-assisted development:
 ```
 
 ### Example Interaction
+
 ```
 User: "Add a function to process user data"
 
@@ -415,14 +427,14 @@ AI: [Generates validated, type-safe code]
 
 ## 🔧 Built-in Features
 
--   ✅ Context engineering documents (TELIS)
--   ✅ Optimal folder structure (3-5 depth)
--   ✅ Configuration management
--   ✅ Testing framework setup
--   ✅ Documentation templates
--   ✅ Git configuration
--   ✅ Editor configuration
--   ✅ Validation pipelines
+- ✅ Context engineering documents (TELIS)
+- ✅ Optimal folder structure (3-5 depth)
+- ✅ Configuration management
+- ✅ Testing framework setup
+- ✅ Documentation templates
+- ✅ Git configuration
+- ✅ Editor configuration
+- ✅ Validation pipelines
 
 ---
 
@@ -431,20 +443,22 @@ AI: [Generates validated, type-safe code]
 MIT License
 
 ---
-│   ├── development/        # Development environment
-│   ├── testing/            # Testing environment
-│   └── production/         # Production environment
+
+│ ├── development/ # Development environment
+│ ├── testing/ # Testing environment
+│ └── production/ # Production environment
 │
-├── scripts/                # Utility Scripts
-│   └── [automation scripts]
+├── scripts/ # Utility Scripts
+│ └── [automation scripts]
 │
-├── .gitignore              # Git ignore patterns
-├── .editorconfig           # Editor configuration
-├── README.md               # This file
-├── PROJECT_SETUP.md        # Detailed setup instructions
-├── STRUCTURE_GUIDE.md      # Folder structure guide
-└── TELIS.md                # TELIS methodology documentation
-```
+├── .gitignore # Git ignore patterns
+├── .editorconfig # Editor configuration
+├── README.md # This file
+├── PROJECT_SETUP.md # Detailed setup instructions
+├── STRUCTURE_GUIDE.md # Folder structure guide
+└── TELIS.md # TELIS methodology documentation
+
+````
 
 ---
 
@@ -527,26 +541,29 @@ Edit `.template/project.config.json`:
   "languages": ["javascript", "python"],
   "framework": "your-framework"
 }
-```
+````
 
 ### 2. Customize Context Documents
 
 Update each file in `.context/`:
--   Add your tech stack to `knowledge.md`
--   Configure LSP servers in `tools.md`
--   Define coding standards in `rules.md`
--   Set system role in `instructions.md`
+
+- Add your tech stack to `knowledge.md`
+- Configure LSP servers in `tools.md`
+- Define coding standards in `rules.md`
+- Set system role in `instructions.md`
 
 ### 3. Adapt Folder Structure
 
 Modify `src/` structure based on your needs:
--   **Web App**: `src/components/`, `src/pages/`, `src/services/`
--   **API**: `src/controllers/`, `src/models/`, `src/routes/`
--   **Library**: `src/lib/`, `src/types/`, `src/index.js`
+
+- **Web App**: `src/components/`, `src/pages/`, `src/services/`
+- **API**: `src/controllers/`, `src/models/`, `src/routes/`
+- **Library**: `src/lib/`, `src/types/`, `src/index.js`
 
 ### 4. Configure Tools
 
 Set up language-specific tools:
+
 ```bash
 # JavaScript/TypeScript
 npm init
@@ -564,22 +581,22 @@ pip install pylint mypy
 
 Following TELIS methodology error rate targets:
 
-| Error Type | Target | Validation |
-|------------|--------|------------|
-| Syntax Errors | <0.5% | AST parsing |
-| Type Errors | <1.0% | Type checker |
-| API Misuse | <0.5% | Runtime validation |
-| **Total** | **<2.0%** | Combined metrics |
+| Error Type    | Target    | Validation         |
+| ------------- | --------- | ------------------ |
+| Syntax Errors | <0.5%     | AST parsing        |
+| Type Errors   | <1.0%     | Type checker       |
+| API Misuse    | <0.5%     | Runtime validation |
+| **Total**     | **<2.0%** | Combined metrics   |
 
 ---
 
 ## 📖 Documentation
 
--   **[PROJECT_SETUP.md](PROJECT_SETUP.md)** - Detailed setup instructions
--   **[STRUCTURE_GUIDE.md](STRUCTURE_GUIDE.md)** - Folder organization guide
--   **[TELIS.md](TELIS.md)** - Complete methodology reference
--   **[INTEGRATION_GUIDE.md](INTEGRATION_GUIDE.md)** - Detailed 4-phase integration roadmap
--   **[docs/](docs/)** - Additional project documentation
+- **[PROJECT_SETUP.md](PROJECT_SETUP.md)** - Detailed setup instructions
+- **[STRUCTURE_GUIDE.md](STRUCTURE_GUIDE.md)** - Folder organization guide
+- **[TELIS.md](TELIS.md)** - Complete methodology reference
+- **[INTEGRATION_GUIDE.md](INTEGRATION_GUIDE.md)** - Detailed 4-phase integration roadmap
+- **[docs/](docs/)** - Additional project documentation
 
 ---
 
@@ -588,6 +605,7 @@ Following TELIS methodology error rate targets:
 This template is optimized for AI-assisted development:
 
 ### Progressive Context Protocol
+
 ```
 1. AI starts with Tier 1 (nano) knowledge shards
 2. AI requests specific information as needed
@@ -596,6 +614,7 @@ This template is optimized for AI-assisted development:
 ```
 
 ### Example Interaction
+
 ```
 User: "Add a function to process user data"
 
@@ -610,14 +629,14 @@ AI: [Generates validated, type-safe code]
 
 ## 🔧 Built-in Features
 
--   ✅ Context engineering documents (TELIS)
--   ✅ Optimal folder structure (3-5 depth)
--   ✅ Configuration management
--   ✅ Testing framework setup
--   ✅ Documentation templates
--   ✅ Git configuration
--   ✅ Editor configuration
--   ✅ Validation pipelines
+- ✅ Context engineering documents (TELIS)
+- ✅ Optimal folder structure (3-5 depth)
+- ✅ Configuration management
+- ✅ Testing framework setup
+- ✅ Documentation templates
+- ✅ Git configuration
+- ✅ Editor configuration
+- ✅ Validation pipelines
 
 ---
 
@@ -629,9 +648,10 @@ MIT License
 
 ## 🙏 Credits
 
--   **TELIS Methodology**: Token-Efficient Language Intelligence System
--   **BMAD Framework**: [Breakthrough Method for Agile Ai Driven Development](https://github.com/bmad-code-org/BMAD-METHOD)
--   **Fabien Dostie**: [AetherBase](https://github.com/fabiendostie/AetherBase)
+- **TELIS Methodology**: Token-Efficient Language Intelligence System
+- **BMAD Framework**: [Breakthrough Method for Agile Ai Driven Development](https://github.com/bmad-code-org/BMAD-METHOD)
+- **Fabien Dostie**: [AetherBase](https://github.com/fabiendostie/AetherBase)
+
 ---
 
 **Ready to build something amazing?** Start by reading [PROJECT_SETUP.md](PROJECT_SETUP.md)!

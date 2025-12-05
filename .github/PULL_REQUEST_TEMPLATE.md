@@ -5,9 +5,11 @@
 <!-- Provide a clear and concise description of your changes -->
 
 ### What does this PR do?
+
 <!-- Explain the changes and why they were needed -->
 
 ### Related Issues
+
 <!-- Link related issues using keywords: Closes #123, Fixes #456, Relates to #789 -->
 
 Closes #
@@ -60,7 +62,7 @@ Closes #
 - [ ] **Integration tests** added/updated (if applicable)
 - [ ] **E2E tests** added/updated (if critical user flow)
 - [ ] All tests are deterministic (no flaky tests)
-- [ ] Test coverage: **___%** (must be ≥85%)
+- [ ] Test coverage: **\_\_\_%** (must be ≥85%)
 
 ### Documentation
 
@@ -76,9 +78,11 @@ Closes #
 <!-- If UI changes, add screenshots or videos -->
 
 ### Before
+
 <!-- Screenshot or description of current state -->
 
 ### After
+
 <!-- Screenshot or description of new state -->
 
 ---
@@ -105,6 +109,7 @@ Closes #
 - [ ] Performance degraded (explain why acceptable)
 
 **Details**:
+
 <!-- Benchmarks, metrics, or explanation -->
 
 ---
@@ -130,14 +135,16 @@ Closes #
 <!-- Anything specific reviewers should focus on? -->
 
 ### Areas of Concern
+
 <!-- Highlight areas you'd like extra scrutiny on -->
 
 ### Testing Instructions
+
 <!-- How should reviewers test this? -->
 
-1. 
-2. 
-3. 
+1.
+2.
+3.
 
 ---
 
@@ -160,6 +167,7 @@ Closes #
 ---
 
 **Quality Gates** (auto-checked by CI):
+
 - ✅ Linting passed
 - ✅ Type checking passed
 - ✅ Unit tests passed
@@ -168,7 +176,7 @@ Closes #
 - ✅ Coverage ≥85%
 - ✅ Build successful
 
-<!-- 
-Thank you for your contribution! 
+<!--
+Thank you for your contribution!
 Please ensure all checklist items are completed before requesting review.
 -->

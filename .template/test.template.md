@@ -1,6 +1,7 @@
 # Example Test Template
 
 ## Test Information
+
 - **Test Suite**: [ModuleName] Tests
 - **Type**: [Unit|Integration|E2E]
 - **Framework**: [Jest|Mocha|Pytest|etc.]
@@ -86,7 +87,7 @@ from src.module import function_to_test, ClassToTest
 
 class Test[ClassName]:
     """Test cases for [ClassName]"""
-    
+
     @pytest.fixture
     def setup_data(self):
         """Fixture for test data"""
@@ -94,25 +95,25 @@ class Test[ClassName]:
             'input': 'test data',
             'expected': 'expected result'
         }
-    
+
     def test_[feature_name](self, setup_data):
         """Test [expected behavior]"""
         # Arrange
         input_data = setup_data['input']
         expected = setup_data['expected']
-        
+
         # Act
         result = function_to_test(input_data)
-        
+
         # Assert
         assert result == expected
-    
+
     def test_edge_case_[description](self):
         """Test edge case: [description]"""
         edge_case = [edge case data]
         with pytest.raises([ExceptionType]):
             function_to_test(edge_case)
-    
+
     @pytest.mark.parametrize("input,expected", [
         ([input1], [expected1]),
         ([input2], [expected2]),
@@ -135,6 +136,7 @@ async def test_async_function():
 ## Test Coverage Guidelines
 
 ### What to Test
+
 - ✅ Happy path (expected use cases)
 - ✅ Edge cases (boundary conditions)
 - ✅ Error handling (invalid inputs)
@@ -142,6 +144,7 @@ async def test_async_function():
 - ✅ State changes (before/after)
 
 ### What NOT to Test
+
 - ❌ Third-party library internals
 - ❌ Getters/setters (unless they have logic)
 - ❌ Framework code
@@ -152,6 +155,7 @@ async def test_async_function():
 ## Naming Conventions
 
 ### Test Function Names
+
 ```
 test_[feature]_[scenario]_[expected_result]
 
@@ -162,6 +166,7 @@ Examples:
 ```
 
 ### Test File Names
+
 ```
 [module_name].test.[ext]
 or
@@ -177,18 +182,20 @@ Examples:
 ## Mocking Examples
 
 ### Jest
+
 ```javascript
 jest.mock('../src/api', () => ({
-  fetchData: jest.fn(() => Promise.resolve({ data: 'mocked' }))
+    fetchData: jest.fn(() => Promise.resolve({ data: 'mocked' })),
 }));
 
 it('should use mocked API', async () => {
-  const result = await serviceUsingAPI();
-  expect(mockAPI).toHaveBeenCalledWith(expectedParams);
+    const result = await serviceUsingAPI();
+    expect(mockAPI).toHaveBeenCalledWith(expectedParams);
 });
 ```
 
 ### Pytest
+
 ```python
 from unittest.mock import Mock, patch
 
@@ -212,4 +219,4 @@ def test_with_mock(mock_service):
 
 ---
 
-*This is a template file. Customize based on your testing framework and requirements.*
+_This is a template file. Customize based on your testing framework and requirements._

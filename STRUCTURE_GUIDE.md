@@ -23,6 +23,7 @@ This structure follows **optimal folder organization principles**:
 **Purpose**: AI context engineering following TELIS methodology
 
 **Contents**:
+
 ```
 .context/
 ├── instructions.md    # AI system role and task guidance
@@ -33,11 +34,13 @@ This structure follows **optimal folder organization principles**:
 ```
 
 **Usage**:
+
 - Contains all information needed for AI-assisted development
 - Organized in three tiers: Nano (50 tokens), Micro (500), Full (2000+)
 - Updated as project evolves
 
 **Best Practices**:
+
 - Keep instructions concise and actionable
 - Use tiered knowledge structure (Layer 2 of TELIS)
 - Update summary regularly with decisions
@@ -50,6 +53,7 @@ This structure follows **optimal folder organization principles**:
 **Purpose**: Store reusable templates and boilerplate code
 
 **Contents**:
+
 ```
 .template/
 ├── project.config.json    # Project metadata
@@ -60,6 +64,7 @@ This structure follows **optimal folder organization principles**:
 ```
 
 **Usage**:
+
 - Quick scaffolding of new files
 - Consistent structure across similar files
 - Project initialization data
@@ -73,6 +78,7 @@ This structure follows **optimal folder organization principles**:
 **Purpose**: Automation scripts and workflow definitions
 
 **Contents**:
+
 ```
 .workflows/
 ├── build.md           # Build workflow
@@ -84,6 +90,7 @@ This structure follows **optimal folder organization principles**:
 **Format**: Markdown files with step-by-step instructions
 
 **Usage**:
+
 - Document automated processes
 - Define CI/CD pipelines
 - Script orchestration
@@ -95,6 +102,7 @@ This structure follows **optimal folder organization principles**:
 **Purpose**: All project documentation
 
 **Structure**:
+
 ```
 docs/
 ├── architecture/
@@ -113,11 +121,13 @@ docs/
     └── [ADR files]    # Architecture Decision Records
 ```
 
-**Naming Convention**: 
+**Naming Convention**:
+
 - Files: `lowercase-with-dashes.md`
 - Folders: `lowercase` single words or `compound-words`
 
 **Best Practices**:
+
 - Use markdown for all documentation
 - Include diagrams (mermaid, images)
 - Keep docs close to code when possible
@@ -132,6 +142,7 @@ docs/
 **Adaptable Structure** (choose based on project type):
 
 #### Option A: Feature-Based (Recommended for large apps)
+
 ```
 src/
 ├── core/              # Core business logic
@@ -152,6 +163,7 @@ src/
 ```
 
 #### Option B: Layer-Based (Traditional architecture)
+
 ```
 src/
 ├── controllers/       # Request handlers
@@ -164,6 +176,7 @@ src/
 ```
 
 #### Option C: Library Structure
+
 ```
 src/
 ├── lib/               # Main library code
@@ -175,6 +188,7 @@ src/
 ```
 
 **Naming Conventions**:
+
 - **Files**: `camelCase.js`, `PascalCase.jsx` (components), `kebab-case.js`
 - **Folders**: `lowercase` or `kebab-case`
 - **Classes**: `PascalCase`
@@ -189,6 +203,7 @@ src/
 **Purpose**: All test files
 
 **Structure**:
+
 ```
 tests/
 ├── unit/              # Unit tests
@@ -204,11 +219,13 @@ tests/
 ```
 
 **Naming Convention**:
+
 - Unit tests: `[filename].test.js` or `[filename].spec.js`
 - E2E tests: `[scenario].e2e.js`
 - Fixtures: `[data-name].fixture.json`
 
 **Best Practices**:
+
 - Mirror `src/` structure in `unit/`
 - Group integration tests by feature
 - Keep fixtures separate
@@ -221,6 +238,7 @@ tests/
 **Purpose**: Environment and application configuration
 
 **Structure**:
+
 ```
 config/
 ├── default.json       # Default configuration
@@ -231,6 +249,7 @@ config/
 ```
 
 **Alternative Structure** (for complex configs):
+
 ```
 config/
 ├── environments/
@@ -243,6 +262,7 @@ config/
 ```
 
 **Security**:
+
 - **Never commit secrets** (use environment variables)
 - Use `.env` files (add to `.gitignore`)
 - Document required variables
@@ -254,6 +274,7 @@ config/
 **Purpose**: Build scripts, deployment scripts, utilities
 
 **Structure**:
+
 ```
 scripts/
 ├── build/
@@ -270,9 +291,11 @@ scripts/
 ```
 
 **Naming Convention**: `verb-noun.[ext]`
+
 - Examples: `build-app.js`, `deploy-prod.sh`, `seed-database.js`
 
 **Best Practices**:
+
 - Make scripts executable (`chmod +x`)
 - Add shebang for shell scripts
 - Include usage documentation
@@ -292,20 +315,21 @@ scripts/
 
 ### Common Patterns
 
-| File Type | Convention | Example |
-|-----------|------------|---------|
-| Components | PascalCase | `UserProfile.jsx` |
-| Services | camelCase | `authService.js` |
-| Utilities | camelCase | `formatDate.js` |
-| Constants | UPPER_SNAKE | `API_CONSTANTS.js` |
-| Tests | [name].test | `userService.test.js` |
-| Config | kebab-case | `database-config.js` |
-| Docs | kebab-case | `setup-guide.md` |
-| Types | PascalCase | `UserType.ts` |
+| File Type  | Convention  | Example               |
+| ---------- | ----------- | --------------------- |
+| Components | PascalCase  | `UserProfile.jsx`     |
+| Services   | camelCase   | `authService.js`      |
+| Utilities  | camelCase   | `formatDate.js`       |
+| Constants  | UPPER_SNAKE | `API_CONSTANTS.js`    |
+| Tests      | [name].test | `userService.test.js` |
+| Config     | kebab-case  | `database-config.js`  |
+| Docs       | kebab-case  | `setup-guide.md`      |
+| Types      | PascalCase  | `UserType.ts`         |
 
 ### Date Formatting
 
 When including dates in filenames:
+
 ```
 ISO 8601 format: YYYY-MM-DD
 Example: "Project_Report_2025-12-03.pdf"
@@ -318,6 +342,7 @@ Example: "Project_Report_2025-12-03.pdf"
 ### Ideal Depth: 3-5 Levels
 
 **Too Shallow** (poor organization):
+
 ```
 src/
 ├── everything.js      ❌ No organization
@@ -325,6 +350,7 @@ src/
 ```
 
 **Too Deep** (hard to navigate):
+
 ```
 src/
 └── features/
@@ -337,6 +363,7 @@ src/
 ```
 
 **Optimal** (3-5 levels):
+
 ```
 src/
 ├── features/
@@ -350,9 +377,10 @@ src/
 ### When to Flatten
 
 If a folder has only 1 child for extended depth, consider flattening:
+
 ```
 Before:
-src/core/services/auth/index.js  
+src/core/services/auth/index.js
 
 After:
 src/core/authService.js
@@ -363,6 +391,7 @@ src/core/authService.js
 ## Scalability Guidelines
 
 ### Start Simple
+
 ```
 src/
 ├── index.js
@@ -371,6 +400,7 @@ src/
 ```
 
 ### Grow Organically
+
 ```
 src/
 ├── components/
@@ -384,6 +414,7 @@ src/
 ### Refactor When Needed
 
 **Triggers for restructuring**:
+
 - Folder has >10 files
 - Related files in different locations
 - Depth exceeds 5 levels
@@ -394,6 +425,7 @@ src/
 ## Project Type Examples
 
 ### SPA (Single Page Application)
+
 ```
 src/
 ├── components/
@@ -406,6 +438,7 @@ src/
 ```
 
 ### API Server
+
 ```
 src/
 ├── routes/
@@ -417,6 +450,7 @@ src/
 ```
 
 ### CLI Tool
+
 ```
 src/
 ├── commands/
@@ -426,6 +460,7 @@ src/
 ```
 
 ### Mobile App (React Native)
+
 ```
 src/
 ├── screens/
@@ -455,21 +490,24 @@ src/
 
 ### Regular Reviews
 
-**Monthly**: 
+**Monthly**:
+
 - Check for orphaned files
 - Verify naming consistency
 - Ensure depth limits
 
 **Per Sprint**:
+
 - Update `.context/summary.md`
 - Add new knowledge shards
 - Document architectural changes
 
 **As Needed**:
+
 - Refactor overcrowded folders
 - Flatten unnecessary depth
 - Reorganize when confusion arises
 
 ---
 
-*This guide ensures your project remains organized, navigable, and scalable as it grows. Follow these principles and adapt to your specific needs!*
+_This guide ensures your project remains organized, navigable, and scalable as it grows. Follow these principles and adapt to your specific needs!_
