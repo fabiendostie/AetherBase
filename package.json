@@ -1,0 +1,26 @@
+{
+    "name": "aetherbase",
+    "version": "1.0.0",
+    "description": "Universal project template powered by BMAD Method and TELIS.",
+    "main": "src/index.js",
+    "scripts": {
+        "test": "playwright test",
+        "prepare": "husky",
+        "telis:generate": "node scripts/telis/generate-shards.js"
+    },
+    "keywords": [
+        "template",
+        "bmad",
+        "telis",
+        "ai",
+        "agentic"
+    ],
+    "author": "Fabien Dostie",
+    "license": "MIT",
+    "devDependencies": {
+        "@playwright/test": "^1.40.0",
+        "@types/node": "^24.10.1",
+        "husky": "^9.1.7",
+        "typescript": "^5.9.3"
+    }
+}

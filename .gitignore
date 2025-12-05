@@ -99,3 +99,8 @@ credentials.json
 # But allow specific configuration files
 !.editorconfig
 !.gitignore
+
+# Generated Content
+test-results/
+playwright-report/
+.context/shards/

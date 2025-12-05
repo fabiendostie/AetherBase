@@ -4,7 +4,7 @@
 # Token-Efficient Language Intelligence System (TELIS)
 ## A Rigorous Methodology for <2% Code Error Rate
 
-### Research Document for GrooveAgent Development Planning
+### Research Document for TargetProject Development Planning
 **Date:** November 25, 2025  
 **Phase:** Discovery/Brainstorming  
 **Applicability:** Language-Agnostic (Max/MSP, JavaScript, Node.js, Python, JSON)
@@ -18,6 +18,7 @@ This document presents a **comprehensive, language-agnostic methodology** for ma
 1. **LSP Symbiosis** - Real-time type/signature accuracy
 2. **Agentic RAG (TeaRAG)** - Token-efficient retrieval with graph compression  
 3. **Progressive Context Negotiation** - On-demand information escalation
+4. **BMad Method (Process Layer)** - Agile agent workflows driving the development lifecycle
 
 ---
 
@@ -204,7 +205,7 @@ shard_schema:
       tokens: 120
       embedding: <vector_768d>
       
-  # For GrooveAgent specifically:
+  # For TargetProject specifically:
   - id: "node.child_process"
     topics: [spawn, exec, fork, stdio]
     tokens: 200
@@ -368,54 +369,51 @@ cache_specification:
 
 ## Part 5: Language-Specific Configurations
 
-### 5.1  Technology Stack (Example: GrooveAgent **USE ONLY AS TEMPLATE**) 
+### 5.1  Technology Stack (Example: TargetProject **USE ONLY AS TEMPLATE**) 
 
 ```yaml
-grooveagent_languages:
+target_project_languages:
   
-  javascript_m4l:
-    description: "Max for Live JS object"
+  javascript_frontend:
+    description: "Frontend Application"
     lsp_available: true
     lsp_server: "typescript-language-server"
-    special_globals: [max, outlet, post, LiveAPI]
+    special_globals: [window, document]
     shards_priority:
-      - "m4l.live_api"
-      - "m4l.js_object"
-      - "js.callbacks"
-    validation:
-      parser: "acorn"
-      type_check: false  # M4L globals not typed
-      lint: "eslint with m4l-globals config"
-      
-  node_js:
-    description: "Node.js for node.script manager"
-    lsp_available: true
-    lsp_server: "typescript-language-server"
-    shards_priority:
-      - "node.child_process"
-      - "node.fs"
-      - "node.http" # for Ollama API
+      - "dom.api"
       - "js.async"
     validation:
       parser: "acorn"
       type_check: true
       lint: "eslint"
       
-  python_bundled:
-    description: "Bundled Python for MIDI processing"
+  node_js_backend:
+    description: "Backend API"
+    lsp_available: true
+    lsp_server: "typescript-language-server"
+    shards_priority:
+      - "node.http"
+      - "node.fs"
+      - "js.async"
+    validation:
+      parser: "acorn"
+      type_check: true
+      lint: "eslint"
+      
+  python_service:
+    description: "Data Processing Service"
     lsp_available: true
     lsp_server: "pylsp"
     shards_priority:
-      - "py.mido"  # MIDI library
+      - "py.pandas"
       - "py.json"
-      - "py.subprocess"
     validation:
       parser: "ast.parse"
       type_check: "mypy"
       lint: "ruff"
       
-  json_schema:
-    description: "Groove Recipe JSON schema"
+  json_config:
+    description: "Configuration files"
     lsp_available: true
     lsp_server: "vscode-json-languageserver"
     shards_priority:
@@ -429,7 +427,7 @@ grooveagent_languages:
 
 ## Part 6: Implementation Roadmap
 
-### 6.1 Phased Development (Example: GrooveAgent **USE ONLY AS TEMPLATE**) 
+### 6.1 Phased Development (Example: TargetProject **USE ONLY AS TEMPLATE**) 
 
 ```yaml
 phase_1_foundation:
@@ -465,7 +463,7 @@ phase_4_optimization:
   validation: "Avg tokens/query <300, cache hit rate >40%"
 ```
 
-### 6.2 Success Metrics (Example: GrooveAgent **USE ONLY AS TEMPLATE**) 
+### 6.2 Success Metrics (Example: TargetProject **USE ONLY AS TEMPLATE**) 
 
 | Metric | Target | Measurement |
 |--------|--------|-------------|
@@ -480,7 +478,7 @@ phase_4_optimization:
 
 ---
 
-## Part 7: Symbolic Compression Reference (Example: GrooveAgent **USE ONLY AS TEMPLATE**) 
+## Part 7: Symbolic Compression Reference (Example: TargetProject **USE ONLY AS TEMPLATE**) 
 
 
 ### 7.1 Compressed Symbol Dictionary (Sample)
@@ -495,11 +493,6 @@ phase_4_optimization:
 @py.midi.note: "mido.Message('note_on', note=n, velocity=v, time=t)"
 @py.json.load: "json.loads(string) | json.load(file)"
 @py.spawn: "subprocess.Popen([cmd], stdin=PIPE, stdout=PIPE)"
-
-# Max for Live
-@m4l.api.clip: "new LiveAPI('live_set tracks N clip_slots M clip')"
-@m4l.get.notes: "clip.call('get_notes_extended', start, count, pitch_start, pitch_count)"
-@m4l.set.notes: "clip.call('set_notes_extended', notes_json)"
 
 # Usage in prompts:
 # "Use @js.spawn to launch Python" expands to full signature on demand
@@ -524,6 +517,6 @@ This methodology provides a **rigorous, language-agnostic framework** for achiev
 - **Flexibility**: Shard system adapts to any language/framework
 - **Reliability**: Multi-stage validation catches errors before output
 
-For GrooveAgent specifically, this system handles the unique multi-language stack (Max/MSP + JavaScript + Node.js + Python + JSON) with specialized shards and validation pipelines for each layer.
+For **TargetProject**, this system handles the unique multi-language stack with specialized shards and validation pipelines for each layer.
 
 ---
